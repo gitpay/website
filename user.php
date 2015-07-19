@@ -34,6 +34,9 @@ if ($rank > 100) {
   $rank = 100;
 }
 
+$webid = 'http://gitpay.org/' . $user['login'] . '#this';
+$githubaccount = 'http://github.come/' . $user['login'];
+
 ?>
 
 
@@ -178,10 +181,13 @@ if ($rank > 100) {
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
             <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
               <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
-                <h2 class="mdl-card__title-text">Updates</h2>
+                <h2 class="mdl-card__title-text">Linked Data</h2>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                Coming soon...
+                Webid <a href="<?php echo $webid ?>"><?php echo $webid ?></a>
+              </div>
+              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                Github <a href="<?php echo $githubaccount ?>"><?php echo $githubaccount ?></a>
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
