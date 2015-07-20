@@ -40,7 +40,9 @@ $webid = 'http://gitpay.org/' . $user['login'] . '#this';
 $githubaccount = 'http://github.come/' . $user['login'];
 
 
-$turtle = "<#this> a <http://xmlns.com/foaf/0.1/Person> .";
+$turtle = "<#this> a <http://xmlns.com/foaf/0.1/Person> ;\n";
+$turtle .= "<http://xmlns.com/foaf/0.1/name> '$user[name]' ;\n";
+$turtle .= "<http://xmlns.com/foaf/0.1/account> '<https://github.com/$user[login]>' .\n";
 
 header('Access-Control-Allow-Origin : *');
 header("Vary: Accept");
