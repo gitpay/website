@@ -37,7 +37,7 @@ if ($rank > 100) {
 }
 
 $webid = 'http://gitpay.org/' . $user['login'] . '#this';
-$githubaccount = 'http://github.come/' . $user['login'];
+$githubaccount = 'http://github.com/' . $user['login'];
 
 
 $turtle = "<#this> a <http://xmlns.com/foaf/0.1/Person> ;\n";
