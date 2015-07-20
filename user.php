@@ -217,7 +217,7 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
                 Webid <a href="<?php echo $webid ?>"><?php echo $webid ?></a>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                Github <a href="<?php echo $githubaccount ?>"><?php echo $githubaccount ?></a>
+                Github <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $githubaccount ?></a>
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
