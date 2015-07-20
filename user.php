@@ -14,7 +14,58 @@ if (! $nick) {
   $nick = 'deiu';
 }
 
-$user = $client->api('user')->show($nick);
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gitpay";
+
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // sql to create table
+  $sql = "select * from users where login = '$nick' ; ";
+
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+  $user = $stmt->fetch();
+
+}
+catch(PDOException $e)
+{
+  echo $sql . "<br>" . $e->getMessage();
+}
+
+
+//print_r($row);
+
+if (!$user) {
+  $user = $client->api('user')->show($nick);
+  try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // sql to create table
+    $sql = "insert into users values (NULL, '$nick', '$user[name]', '$user[email]', '$user[company]', '$user[location]', '$user[avatar_url]', '$user[blog]', NULL) ; ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+  }
+  catch(PDOException $e)
+  {
+    echo $sql . "<br>" . $e->getMessage();
+  }
+
+} else {
+}
+
+
+
+
 
 
 $users = $client->api('user')->followers($nick);

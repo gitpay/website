@@ -17,6 +17,8 @@ try {
   company VARCHAR(255) NULL,
   location VARCHAR(255) NULL,
   email VARCHAR(255) NULL,
+  avatar_url VARCHAR(255) NULL,
+  blog VARCHAR(255) NULL,
   created_at TIMESTAMP NOT NULL
   )";
 
