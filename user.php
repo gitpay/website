@@ -39,6 +39,25 @@ if ($rank > 100) {
 $webid = 'http://gitpay.org/' . $user['login'] . '#this';
 $githubaccount = 'http://github.come/' . $user['login'];
 
+
+$turtle = "<#this> a <http://xmlns.com/foaf/0.1/Person> .";
+
+header('Access-Control-Allow-Origin : *');
+header("Vary: Accept");
+if (stristr($_SERVER["HTTP_ACCEPT"], "application/turtle")) {
+  header("Content-Type: application/turtle");
+  echo $turtle;
+  exit;
+}
+if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
+  header("Content-Type: text/turtle");
+  echo $turtle;
+  exit;
+}
+
+
+
+
 ?>
 
 
