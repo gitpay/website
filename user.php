@@ -42,6 +42,12 @@ $githubaccount = 'http://github.come/' . $user['login'];
 
 $turtle = "<#this> a <http://xmlns.com/foaf/0.1/Person> ;\n";
 $turtle .= "<http://xmlns.com/foaf/0.1/name> '$user[name]' ;\n";
+for($i=0; $i<sizeof($users); $i++) {
+  $knows = $users[$i]['login'];
+  $turtle .= "<http://xmlns.com/foaf/0.1/knows> <http://gitpay.org/$knows#this> ;\n";
+}
+
+
 $turtle .= "<http://xmlns.com/foaf/0.1/account> '<https://github.com/$user[login]>' .\n";
 
 header('Access-Control-Allow-Origin : *');
