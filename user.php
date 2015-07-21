@@ -112,6 +112,11 @@ if ($webid && $webid['preferredURI']) {
   $preferredURI = $webid['preferredURI'];
 }
 
+$bitcoin;
+if ($webid && $webid['bitcoin']) {
+  $bitcoin = $webid['bitcoin'];
+}
+
 
 $main = 'http://gitpay.org/' . $user['login'] . '#this';
 $githubaccount = 'http://github.com/' . $user['login'];
@@ -301,6 +306,9 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
                 sameAs <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $preferredURI ?></a>
+              </div>
+              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                bitcoin <a rel="me" href="<?php echo $bitcoin ?>"><?php echo $bitcoin ?></a>
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
