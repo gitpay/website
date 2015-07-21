@@ -130,6 +130,10 @@ if ($preferredURI) {
   $turtle .= "<#this> <http://www.w3.org/2002/07/owl#sameAs> <$preferredURI> .\n";
 }
 
+if ($bitcoin) {
+  $turtle .= "<#this> <https://w3id.org/cc#bitcoin> <$bitcoin> .\n";
+}
+
 for($i=0; $i<sizeof($users); $i++) {
   $follows = $users[$i]['login'];
   $turtle .= "<http://gitpay.org/$follows#this> <http://rdfs.org/sioc/ns#follows>  <#this> .\n";
