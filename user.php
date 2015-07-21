@@ -309,7 +309,7 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
                 Github <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $githubaccount ?></a>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                sameAs <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $preferredURI ?></a>
+                sameAs <a rel="me" href="<?php echo $preferredURI ?>"><?php echo $preferredURI ?></a>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
                 bitcoin <a rel="me" href="<?php echo $bitcoin ?>"><?php echo $bitcoin ?></a>
