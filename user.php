@@ -107,6 +107,12 @@ if ($rank > 100) {
   $rank = 100;
 }
 
+$preferredURI;
+if ($webid && $webid['preferredURI']) {
+  $preferredURI = $webid['preferredURI'];
+}
+
+
 $main = 'http://gitpay.org/' . $user['login'] . '#this';
 $githubaccount = 'http://github.com/' . $user['login'];
 
@@ -139,10 +145,6 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
   exit;
 }
 
-$preferredURI;
-if ($webid && $webid['preferredURI']) {
-  $preferredURI = $webid['preferredURI'];
-}
 
 
 ?>
