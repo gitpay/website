@@ -20,6 +20,8 @@ $username = "root";
 $password = "";
 $dbname = "gitpay";
 
+$uri = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
 try {
   $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   // set the PDO error mode to exception
@@ -300,7 +302,7 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
             <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
               <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
-                <h2 class="mdl-card__title-text">Linked Data</h2>
+                <h2 class="mdl-card__title-text"><a class="mdl-color-text--blue-800" href="http://graphite.ecs.soton.ac.uk/browser/?uri=<?php echo $uri ?>">Linked Data</a></h2>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
                 Webid <a href="<?php echo $main ?>"><?php echo $main ?></a>
