@@ -171,7 +171,7 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="description" content="Decentralized payments for github projects">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gitpay - <?php echo $user['login'] ?></title>
 
