@@ -39,6 +39,26 @@ catch(PDOException $e)
 }
 
 
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // sql to create table
+  $sql = "select * from webid where login = '$nick' ; ";
+
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+  $webid = $stmt->fetch();
+
+}
+catch(PDOException $e)
+{
+  echo $sql . "<br>" . $e->getMessage();
+}
+
+
+
 //print_r($row);
 
 if (!$user) {
@@ -87,13 +107,17 @@ if ($rank > 100) {
   $rank = 100;
 }
 
-$webid = 'http://gitpay.org/' . $user['login'] . '#this';
+$main = 'http://gitpay.org/' . $user['login'] . '#this';
 $githubaccount = 'http://github.com/' . $user['login'];
 
 
 $turtle = "<#this> a <http://xmlns.com/foaf/0.1/Person> ;\n";
 $turtle .= "<http://xmlns.com/foaf/0.1/name> '$user[name]' ;\n";
 $turtle .= "<http://xmlns.com/foaf/0.1/account> '<https://github.com/$user[login]>' .\n";
+
+if ($preferredURI) {
+  $turtle .= "<#this> <http://www.w3.org/2002/07/owl#sameAs> '<$preferredURI>' .\n";
+}
 
 for($i=0; $i<sizeof($users); $i++) {
   $follows = $users[$i]['login'];
@@ -115,7 +139,10 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
   exit;
 }
 
-
+$preferredURI;
+if ($webid && $webid['preferredURI']) {
+  $preferredURI = $webid['preferredURI'];
+}
 
 
 ?>
@@ -265,10 +292,13 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
                 <h2 class="mdl-card__title-text">Linked Data</h2>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                Webid <a href="<?php echo $webid ?>"><?php echo $webid ?></a>
+                Webid <a href="<?php echo $main ?>"><?php echo $main ?></a>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
                 Github <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $githubaccount ?></a>
+              </div>
+              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                sameAs <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $preferredURI ?></a>
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
