@@ -300,7 +300,7 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
               <use xlink:href="#piechart" mask="url(#piemask)" />
               <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1"><?php echo $rank ?><tspan font-size="0.2" dy="-0.07">%</tspan></text>
             </svg>
-            <h3>Gitpay Ranking <?php  if ($ledger['balance']) echo "<br>$ledger[balance] bits" ; ?></h3>
+            <h3>Gitpay Ranking <?php  if ($ledger['balance']) echo "<br><a class='mdl-color-text--blue-800' target='_blank' href='w/?walletURI=https:%2F%2Fgitpay.databox.me%2FPublic%2F.wallet%2Fgithub.com%2Flinkeddata%2FSoLiD%2Fwallet%23this&user=". urlencode($preferredURI) ."'>$ledger[balance] bits</a>" ; ?></h3>
           </div>
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
             <h3>Followers</h3>
