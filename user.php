@@ -112,7 +112,28 @@ if ($rank > 100) {
 $preferredURI;
 if ($webid && $webid['preferredURI']) {
   $preferredURI = $webid['preferredURI'];
+
+  try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // sql to create table
+    $sql = "select * from ledger where uri = '$preferredURI' ; ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $ledger = $stmt->fetch();
+
+  }
+  catch(PDOException $e)
+  {
+    echo $sql . "<br>" . $e->getMessage();
+  }
+
 }
+
+
 
 $bitcoin;
 if ($webid && $webid['bitcoin']) {
@@ -279,7 +300,7 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
               <use xlink:href="#piechart" mask="url(#piemask)" />
               <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1"><?php echo $rank ?><tspan font-size="0.2" dy="-0.07">%</tspan></text>
             </svg>
-            <h3>Gitpay Ranking</h3>
+            <h3>Gitpay Ranking <?php  if ($ledger['balance']) echo "<br>$ledger[balance] bits" ; ?></h3>
           </div>
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
             <h3>Followers</h3>
