@@ -147,7 +147,7 @@ $githubaccount = 'http://github.com/' . $user['login'];
 
 $turtle = "<#this> a <http://xmlns.com/foaf/0.1/Person> ;\n";
 $turtle .= "<http://xmlns.com/foaf/0.1/name> '$user[name]' ;\n";
-$turtle .= "<http://xmlns.com/foaf/0.1/account> '<https://github.com/$user[login]>' .\n";
+$turtle .= "<http://xmlns.com/foaf/0.1/account> <https://github.com/$user[login]> .\n";
 
 if ($preferredURI) {
   $turtle .= "<#this> <http://www.w3.org/2002/07/owl#sameAs> <$preferredURI> .\n";
