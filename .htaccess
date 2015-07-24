@@ -1,4 +1,5 @@
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^?]*)$ user.php?user=$1 [NC,L,QSA]
+RewriteRule ^([^?]*)/([^?]*)$ repo.php?user=$1&repo=$2 [NC,L,QSA]
+RewriteRule ^([a-z0-9-]*)$ user.php?user=$1 [NC,L,QSA]
