@@ -143,3 +143,36 @@ EOSQL;
 } catch (PDOException $e){
   echo $e->getMessage();
 }
+
+
+try {
+
+  // set the PDO error mode to exception
+  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  $sql = <<<EOSQL
+  CREATE TABLE wallet (
+  id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  uri VARCHAR(255) NOT NULL,
+  codeRepository VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL
+  ) ENGINE=InnoDB
+EOSQL;
+
+
+  $r = $dbh->exec($sql);
+
+  if ($r !== false){
+    $msg =  "Tables are created successfully!<br/>";
+  } else {
+    $msg =  "Error creating the wallet table.<br/>";
+  }
+
+  // display the message
+  if($msg !== '') {
+    echo $msg;
+  }
+
+} catch (PDOException $e){
+  echo $e->getMessage();
+}
