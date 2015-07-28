@@ -349,13 +349,10 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
             <div class="demo-separator mdl-cell--1-col"></div>
             <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
               <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-                <h3>View options</h3>
+                <h3>Location</h3>
                 <ul>
                   <li>
-                    <label for="chkbox1" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                      <input type="checkbox" id="chkbox1" class="mdl-checkbox__input" />
-                      <span class="mdl-checkbox__label">Star</span>
-                    </label>
+                      <span><?php echo $user['location']; ?></span>
                   </li>
                 </ul>
               </div>
