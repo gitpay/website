@@ -57,7 +57,7 @@ catch(PDOException $e)
   echo $sql . "<br>" . $e->getMessage();
 }
 
-echo '<pre><table>';
+echo '<table>';
 for ($i=0; $i<sizeof($serps); $i++) {
   $a = $serps[$i];
   echo "<tr><td><a href='$a[login]'>$a[login]</a></td><td>$a[name]</td><td><a href='search.php?company=$a[company]'>$a[company]</a></td><td><a href='search.php?location=$a[location]'>$a[location]</a><td/></tr>\n";
