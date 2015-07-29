@@ -174,10 +174,15 @@ for($i=0; $i<sizeof($users); $i++) {
 for($i=0; $i<sizeof($keys); $i++) {
   $key = $keys[$i]['key'];
   $id = $keys[$i]['id'];
-  $turtle .= "<#this> <http://www.w3.org/ns/auth/cert#key> <#$id> .\n";
-  $turtle .= "<#$id> a <http://www.w3.org/ns/auth/cert#RSAPublicKey> ; <http://www.w3.org/ns/auth/cert#openssh> '$key' .\n";
-}
 
+  $command = "./convert.sh '$key'";
+  $modulus = shell_exec ( $command );
+
+
+  $turtle .= "<#this> <http://www.w3.org/ns/auth/cert#key> <#$id> .\n";
+  $turtle .= "<#$id> a <http://www.w3.org/ns/auth/cert#RSAPublicKey> ; <http://www.w3.org/ns/auth/cert#modulus> '$modulus'^^xsd:hexBinary ; <http://www.w3.org/ns/auth/cert#exponent> '65537'^^xsd:integer .\n";
+
+}
 
 
 header('Access-Control-Allow-Origin : *');
