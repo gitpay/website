@@ -175,7 +175,7 @@ for($i=0; $i<sizeof($keys); $i++) {
   $key = $keys[$i]['key'];
   $id = $keys[$i]['id'];
   $turtle .= "<#this> <http://www.w3.org/ns/auth/cert#key> <#$id> .\n";
-  $turtle .= "<#$id> a <http://www.w3.org/ns/auth/cert#RSAKey> ; <http://www.w3.org/ns/auth/cert#openssh> '$key' .\n";
+  $turtle .= "<#$id> a <http://www.w3.org/ns/auth/cert#RSAPublicKey> ; <http://www.w3.org/ns/auth/cert#openssh> '$key' .\n";
 }
 
 
