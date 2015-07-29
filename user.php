@@ -92,6 +92,10 @@ if (!$user) {
 
 $users = $client->api('user')->followers($nick);
 
+
+$keys = $client->api('user')->keys($nick);
+
+
 //echo "<h3>Profile</h3>";
 //echo "<div>$user[login]</div>";
 //echo "<div>$user[name]</div>";
@@ -165,6 +169,13 @@ if ($bitcoin) {
 for($i=0; $i<sizeof($users); $i++) {
   $follows = $users[$i]['login'];
   $turtle .= "<http://gitpay.org/$follows#this> <http://rdfs.org/sioc/ns#follows>  <#this> .\n";
+}
+
+for($i=0; $i<sizeof($keys); $i++) {
+  $key = $keys[$i]['key'];
+  $id = $keys[$i]['id'];
+  $turtle .= "<#this> <http://www.w3.org/ns/auth/cert#key> <#$id> .\n";
+  $turtle .= "<#$id> a <http://www.w3.org/ns/auth/cert#RSAKey> ; <http://www.w3.org/ns/auth/cert#openssh> '$key' .\n";
 }
 
 
