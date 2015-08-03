@@ -163,6 +163,10 @@ if ($preferredURI) {
   $turtle .= "<#this> <http://www.w3.org/2002/07/owl#sameAs> <$preferredURI> .\n";
 }
 
+if ($user['blog']) {
+  $turtle .= "<#this> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <$user[blog]> .\n";
+}
+
 if ($bitcoin) {
   $turtle .= "<#this> <https://w3id.org/cc#bitcoin> <$bitcoin> .\n";
 }
@@ -355,6 +359,9 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
                 sameAs <a rel="me" href="<?php echo $preferredURI ?>"><?php echo $preferredURI ?></a>
+              </div>
+              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                seeAlso <a rel="me" href="<?php echo $user['blog'] ?>"><?php echo $user['blog'] ?></a>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
                 bitcoin <a rel="me" href="<?php echo $bitcoin ?>"><?php echo $bitcoin ?></a>
