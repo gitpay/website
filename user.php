@@ -137,7 +137,7 @@ if ($webid && $webid['preferredURI']) {
 
 }
 
-if ($ledger['codeRepository']) {
+if (isset($ledger) && $ledger['codeRepository']) {
   $arr = split('/', $ledger['codeRepository']);
   $len = sizeof($arr);
   $project = $arr[$len-2] . '/' . $arr[$len-1];
@@ -159,7 +159,7 @@ $turtle .= "<http://xmlns.com/foaf/0.1/name> '$user[name]' ;\n";
 $turtle .= "<http://xmlns.com/foaf/0.1/img> '$user[avatar_url]' ;\n";
 $turtle .= "<http://xmlns.com/foaf/0.1/account> <https://github.com/$user[login]> .\n";
 
-if ($preferredURI) {
+if (isset($preferredURI)) {
   $turtle .= "<#this> <http://www.w3.org/2002/07/owl#sameAs> <$preferredURI> .\n";
 }
 
@@ -167,7 +167,7 @@ if ($user['blog']) {
   $turtle .= "<#this> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <$user[blog]> .\n";
 }
 
-if ($bitcoin) {
+if (isset($bitcoin)) {
   $turtle .= "<#this> <https://w3id.org/cc#bitcoin> <$bitcoin> .\n";
 }
 
@@ -326,7 +326,7 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
               <use xlink:href="#piechart" mask="url(#piemask)" />
               <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1"><?php echo $rank ?><tspan font-size="0.2" dy="-0.07">%</tspan></text>
             </svg>
-            <h3>Gitpay Ranking <?php  if ($ledger['balance']) echo "<br><a class='mdl-color-text--blue-800' target='_blank' href='w/?walletURI=https:%2F%2Fgitpay.databox.me%2FPublic%2F.wallet%2Fgithub.com%2Flinkeddata%2FSoLiD%2Fwallet%23this&user=". urlencode($preferredURI) ."'>$ledger[balance] bits</a> - <a href='$project'>Project</a>" ; ?></h3>
+            <h3>Gitpay Ranking <?php  if (isset($ledger) && $ledger['balance']) echo "<br><a class='mdl-color-text--blue-800' target='_blank' href='w/?walletURI=https:%2F%2Fgitpay.databox.me%2FPublic%2F.wallet%2Fgithub.com%2Flinkeddata%2FSoLiD%2Fwallet%23this&user=". urlencode($preferredURI) ."'>$ledger[balance] bits</a> - <a href='$project'>Project</a>" ; ?></h3>
           </div>
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
             <h3>Followers</h3>
@@ -358,13 +358,13 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
                 Github <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $githubaccount ?></a>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                sameAs <a rel="me" href="<?php echo $preferredURI ?>"><?php echo $preferredURI ?></a>
+                sameAs <a rel="me" href="<?php if (isset($preferredURI)) echo $preferredURI ?>"><?php if (isset($preferredURI))  echo $preferredURI ?></a>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
                 seeAlso <a rel="me" href="<?php echo $user['blog'] ?>"><?php echo $user['blog'] ?></a>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                bitcoin <a rel="me" href="<?php echo $bitcoin ?>"><?php echo $bitcoin ?></a>
+                bitcoin <a rel="me" href="<?php if (isset($bitcoin)) echo $bitcoin ?>"><?php if (isset($bitcoin)) echo $bitcoin ?></a>
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
