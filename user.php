@@ -17,7 +17,7 @@ if (! $nick) {
 $uri = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+  $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
   // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -36,7 +36,7 @@ catch(PDOException $e)
 
 
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+  $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
   // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -60,7 +60,7 @@ catch(PDOException $e)
 if (!$user) {
   $user = $client->api('user')->show($nick);
   try {
-    $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+    $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -112,7 +112,7 @@ if ($webid && $webid['preferredURI']) {
   $preferredURI = $webid['preferredURI'];
 
   try {
-    $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+    $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
