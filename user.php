@@ -60,7 +60,20 @@ catch(PDOException $e)
 //print_r($row);
 
 if (!$user) {
-  $user = $client->api('user')->show($nick);
+
+  try {
+    $user = $client->api('user')->show($nick);
+
+  }
+  catch(Exception $e)
+  {
+    header('HTTP/1.1 503 Service Temporarily Unavailable');
+    header('Status: 503 Service Temporarily Unavailable');
+    header('Retry-After: 1800');//300 seconds
+    exit;
+        //echo $sql . "<br>" . $e->getMessage();
+  }
+
   try {
     $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
     // set the PDO error mode to exception
@@ -73,9 +86,9 @@ if (!$user) {
     $stmt->execute();
 
   }
-  catch(PDOException $e)
+  catch(Exception $e)
   {
-    echo $sql . "<br>" . $e->getMessage();
+    //echo $sql . "<br>" . $e->getMessage();
   }
 
 } else {
@@ -84,12 +97,36 @@ if (!$user) {
 
 
 
+try {
+  $users = $client->api('user')->followers($nick);
+
+}
+catch(Exception $e)
+{
+  header('HTTP/1.1 503 Service Temporarily Unavailable');
+  header('Status: 503 Service Temporarily Unavailable');
+  header('Retry-After: 1800');//300 seconds
+  exit;
+  //echo $sql . "<br>" . $e->getMessage();
+}
 
 
-$users = $client->api('user')->followers($nick);
+
+try {
+  $keys = $client->api('user')->keys($nick);
+
+}
+catch(Exception $e)
+{
+  header('HTTP/1.1 503 Service Temporarily Unavailable');
+  header('Status: 503 Service Temporarily Unavailable');
+  header('Retry-After: 1800');//300 seconds
+  exit;
+  //echo $sql . "<br>" . $e->getMessage();
+}
 
 
-$keys = $client->api('user')->keys($nick);
+
 
 
 //echo "<h3>Profile</h3>";
