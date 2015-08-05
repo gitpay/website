@@ -33,7 +33,7 @@ try {
 }
 catch(PDOException $e)
 {
-  echo $sql . "<br>" . $e->getMessage();
+  //echo $sql . "<br>" . $e->getMessage();
 }
 
 
@@ -52,7 +52,7 @@ try {
 }
 catch(PDOException $e)
 {
-  echo $sql . "<br>" . $e->getMessage();
+  //echo $sql . "<br>" . $e->getMessage();
 }
 
 
