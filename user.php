@@ -69,7 +69,7 @@ if (!$user) {
   {
     header('HTTP/1.1 503 Service Temporarily Unavailable');
     header('Status: 503 Service Temporarily Unavailable');
-    header('Retry-After: 1800');//300 seconds
+    header('Retry-After: 3600');//300 seconds
     exit;
         //echo $sql . "<br>" . $e->getMessage();
   }
@@ -105,7 +105,7 @@ catch(Exception $e)
 {
   header('HTTP/1.1 503 Service Temporarily Unavailable');
   header('Status: 503 Service Temporarily Unavailable');
-  header('Retry-After: 1800');//300 seconds
+  header('Retry-After: 3600');//300 seconds
   exit;
   //echo $sql . "<br>" . $e->getMessage();
 }
@@ -120,7 +120,7 @@ catch(Exception $e)
 {
   header('HTTP/1.1 503 Service Temporarily Unavailable');
   header('Status: 503 Service Temporarily Unavailable');
-  header('Retry-After: 1800');//300 seconds
+  header('Retry-After: 3600');//300 seconds
   exit;
   //echo $sql . "<br>" . $e->getMessage();
 }
