@@ -409,7 +409,7 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
                 <h3>Location</h3>
                 <ul>
                   <li>
-                      <span><a class="mdl-color-text--white" target="_blank" href="http://www.geonames.org/search.html?q=<?php echo $user['location']; ?>"><?php echo $user['location']; ?></span>
+                      <span><a class="mdl-color-text--white" target="_blank" href="http://www.geonames.org/search.html?q=<?php if (isset($user['location'])) { echo $user['location']; } ?>"><?php if (isset($user['location'])) { echo $user['location']; } ?></span>
                   </li>
                 </ul>
               </div>
