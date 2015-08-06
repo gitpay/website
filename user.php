@@ -123,7 +123,12 @@ if (!$user) {
     } else {
       $company = "'$user[company]'";
     }
-    $sql = "insert into users values (NULL, '$nick', '$user[name]', '$user[email]', $company, '$user[location]', $avatar, $blog, NULL) ; ";
+    if(!isset($user['location'])) {
+      $location = "NULL";
+    } else {
+      $location = "'$user[location]'";
+    }
+    $sql = "insert into users values (NULL, '$nick', '$user[name]', '$user[email]', $company, $location, $avatar, $blog, NULL) ; ";
     error_log($sql);
 
     $stmt = $conn->prepare($sql);
