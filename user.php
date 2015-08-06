@@ -113,7 +113,13 @@ if (!$user) {
     } else {
       $avatar = "'$user[avatar_url]'";
     }
-    $sql = "insert into users values (NULL, '$nick', '$user[name]', '$user[email]', '$user[company]', '$user[location]', $avatar, '$user[blog]', NULL) ; ";
+    if(!isset($user['blog'])) {
+      $blog = "NULL";
+    } else {
+      $blog = "'$user[blog]'";
+    }
+    $sql = "insert into users values (NULL, '$nick', '$user[name]', '$user[email]', '$user[company]', '$user[location]', $avatar, $blog, NULL) ; ";
+    error_log($sql);
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
