@@ -138,7 +138,8 @@ Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
 
 					// Feeds: Set keys and paths of feeds
 					feeds : {
-            github : 'https://github.com/<?php echo $login ?>.atom',
+						github : 'https://github.com/<?php echo $login ?>.atom',
+				 	  twitter : 'https://twitrss.me/twitter_user_to_rss/?user=<?php echo $login ?>',
 					},
 
 					// Preprocess: manipulated entries data before it's rendered
