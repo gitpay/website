@@ -341,6 +341,11 @@ for($i=0; $i<sizeof($keys); $i++) {
   $command = "./convert.sh '$key'";
   $modulus = shell_exec ( $command );
 
+  // for gold strip off 00 for 2048 bit keys
+  if (strlen($modulus) === 514 && strpos($modulus, '00') === 0) {
+    $modulus = substr($modulus, 2);
+  }
+
 
   $turtle .= "<#this> <http://www.w3.org/ns/auth/cert#key> <#$id> .\n";
   $turtle .= "<#$id> a <http://www.w3.org/ns/auth/cert#RSAPublicKey> ; <http://www.w3.org/ns/auth/cert#modulus> '$modulus'^^<http://www.w3.org/2001/XMLSchema#hexBinary> ; <http://www.w3.org/ns/auth/cert#exponent> '65537'^^<http://www.w3.org/2001/XMLSchema#integer> .\n";
