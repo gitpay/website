@@ -35,7 +35,7 @@ Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
 		<div class="demos page">
 			<header class="header">
 				<hgroup class="brand">
-					<h1 class="title">Activity Stream for <a href="<?php echo $login ?>"><?php echo $login ?></a></h1>
+					<h1 class="title">Activity Stream for <a href="../../<?php echo $login ?>"><?php echo $login ?></a></h1>
 					<!-- <h2 class="slogan">News and social activity streams made easy</h2> -->
 				</hgroup>
 

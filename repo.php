@@ -204,18 +204,14 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
             </button>
             <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
               <li class="mdl-menu__item">hello@example.com</li>
-              <li class="mdl-menu__item">info@example.com</li>
               <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
             </ul>
           </div>
         </header>
 
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">home</i>Home</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">inbox</i>Inbox</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">flag</i>Updates</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">shopping_cart</i>Purchases</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Social</a>
+          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons">home</i>Home</a>
+          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Social</a>
           <div class="mdl-layout-spacer"></div>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">help_outline</i></a>
         </nav>
