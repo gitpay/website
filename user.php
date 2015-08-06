@@ -75,7 +75,7 @@ if (!$user) {
       $conn = new PDO("mysql:host=$host;dbname=$fallbackdb", $username, $password);
       // set the PDO error mode to exception
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      
+
       // sql to create table
       $sql = "select * from users where login = '$nick' ; ";
 
@@ -108,7 +108,12 @@ if (!$user) {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // sql to create table
-    $sql = "insert into users values (NULL, '$nick', '$user[name]', '$user[email]', '$user[company]', '$user[location]', '$user[avatar_url]', '$user[blog]', NULL) ; ";
+    if(!isset($user['avatar_url'])) {
+      $avatar = "NULL";
+    } else {
+      $avatar = "'$user[avatar_url]'";
+    }
+    $sql = "insert into users values (NULL, '$nick', '$user[name]', '$user[email]', '$user[company]', '$user[location]', $avatar, '$user[blog]', NULL) ; ";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
