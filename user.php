@@ -187,6 +187,54 @@ catch(Exception $e)
 
 
 
+try {
+  $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // sql to create table
+  if(!isset($user['avatar_url'])) {
+    $avatar = "NULL";
+  } else {
+    $avatar = "'$user[avatar_url]'";
+  }
+  if(!isset($user['blog'])) {
+    $blog = "NULL";
+  } else {
+    $blog = "'$user[blog]'";
+  }
+  if(!isset($user['company'])) {
+    $company = "NULL";
+  } else {
+    $company = "'$user[company]'";
+  }
+  if(!isset($user['location'])) {
+    $location = "NULL";
+  } else {
+    $location = "'$user[location]'";
+  }
+  if(!isset($user['email'])) {
+    $email = "NULL";
+  } else {
+    $email = "'$user[email]'";
+  }
+  if(!isset($user['name'])) {
+    $name = "NULL";
+  } else {
+    $name = "'$user[name]'";
+  }
+  $sql = "insert into users values (NULL, '$nick', $name, $email, $company, $location, $avatar, $blog, NULL) ; ";
+  error_log($sql);
+
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+
+}
+catch(Exception $e)
+{
+  //echo $sql . "<br>" . $e->getMessage();
+}
+
 
 
 //echo "<h3>Profile</h3>";
@@ -287,6 +335,30 @@ for($i=0; $i<sizeof($keys); $i++) {
 
   $turtle .= "<#this> <http://www.w3.org/ns/auth/cert#key> <#$id> .\n";
   $turtle .= "<#$id> a <http://www.w3.org/ns/auth/cert#RSAPublicKey> ; <http://www.w3.org/ns/auth/cert#modulus> '$modulus'^^<http://www.w3.org/2001/XMLSchema#hexBinary> ; <http://www.w3.org/ns/auth/cert#exponent> '65537'^^<http://www.w3.org/2001/XMLSchema#integer> .\n";
+
+
+  try {
+    $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    if(!isset($user['name'])) {
+      $name = "NULL";
+    } else {
+      $name = "'$user[name]'";
+    }
+    $sql = "insert into publickeys values ($id, '$nick', '$key', NULL) ; ";
+    error_log($sql);
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+  }
+  catch(Exception $e)
+  {
+    //echo $sql . "<br>" . $e->getMessage();
+  }
+
 
 }
 
