@@ -204,7 +204,7 @@ if (isset($preferredURI)) {
   $turtle .= "<#this> <http://www.w3.org/2002/07/owl#sameAs> <$preferredURI> .\n";
 }
 
-if ($user['blog']) {
+if (isset($user['blog'])) {
   $turtle .= "<#this> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <$user[blog]> .\n";
 }
 
