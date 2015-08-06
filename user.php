@@ -394,7 +394,7 @@ if (stristr($_SERVER["HTTP_ACCEPT"], "text/turtle")) {
                 sameAs <a rel="me" href="<?php if (isset($preferredURI)) echo $preferredURI ?>"><?php if (isset($preferredURI))  echo $preferredURI ?></a>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                seeAlso <a rel="me" href="<?php echo $user['blog'] ?>"><?php echo $user['blog'] ?></a>
+                seeAlso <a rel="me" href="<?php if (isset($user['blog'])) { echo $user['blog']; } ?>"><?php  if (isset($user['blog'])) { echo $user['blog']; } ?></a>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
                 bitcoin <a rel="me" href="<?php if (isset($bitcoin)) echo $bitcoin ?>"><?php if (isset($bitcoin)) echo $bitcoin ?></a>
