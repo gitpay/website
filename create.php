@@ -221,9 +221,10 @@ try {
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   $sql = <<<EOSQL
-  CREATE TABLE `keys` (
+  CREATE TABLE `publickeys` (
     `key_id` int(11) NOT NULL,
     `login` VARCHAR(255) NOT NULL,
+    `key` VARCHAR(65535) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`key_id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8
@@ -235,7 +236,7 @@ EOSQL;
   if ($r !== false){
     $msg =  "Tables are created successfully!<br/>";
   } else {
-    $msg =  "Error creating the keys table.<br/>";
+    $msg =  "Error creating the publickeys table.<br/>";
   }
 
   // display the message
