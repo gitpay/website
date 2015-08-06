@@ -153,6 +153,8 @@ if (!$user) {
 } else {
 }
 
+
+// followers
 try {
   $users = $client->api('user')->followers($nick);
   for ($i=0; $i<sizeof($users); $i++) {
@@ -167,11 +169,11 @@ try {
 catch(Exception $e)
 {
   $throttled = true;
-  error_log('api error for followers of : ' . $nick);
-  header('HTTP/1.1 503 Service Temporarily Unavailable');
-  header('Status: 503 Service Temporarily Unavailable');
-  header('Retry-After: 3600');//300 seconds
-  exit;
+  //error_log('api error for followers of : ' . $nick);
+  //header('HTTP/1.1 503 Service Temporarily Unavailable');
+  //header('Status: 503 Service Temporarily Unavailable');
+  //header('Retry-After: 3600');//300 seconds
+  //exit;
   //echo $sql . "<br>" . $e->getMessage();
 }
 
@@ -184,11 +186,11 @@ try {
 catch(Exception $e)
 {
   $throttled = true;
-  error_log('api error for keys of user : ' . $nick);
-  header('HTTP/1.1 503 Service Temporarily Unavailable');
-  header('Status: 503 Service Temporarily Unavailable');
-  header('Retry-After: 3600');//300 seconds
-  exit;
+  //error_log('api error for keys of user : ' . $nick);
+  //header('HTTP/1.1 503 Service Temporarily Unavailable');
+  //header('Status: 503 Service Temporarily Unavailable');
+  //header('Retry-After: 3600');//300 seconds
+  //exit;
   //echo $sql . "<br>" . $e->getMessage();
 }
 
