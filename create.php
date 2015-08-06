@@ -176,3 +176,40 @@ EOSQL;
 } catch (PDOException $e){
   echo $e->getMessage();
 }
+
+
+try {
+
+  // set the PDO error mode to exception
+  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  $sql = <<<EOSQL
+  CREATE TABLE `followers` (
+    `follower_id` int(11) NOT NULL,
+    `user_id` int(11) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `ext_ref_id` varchar(24) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`follower_id`,`user_id`),
+    KEY `follower_id` (`user_id`),
+    CONSTRAINT `follower_fk1` FOREIGN KEY (`follower_id`) REFERENCES `users` (`id`),
+    CONSTRAINT `follower_fk2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+EOSQL;
+
+
+  $r = $dbh->exec($sql);
+
+  if ($r !== false){
+    $msg =  "Tables are created successfully!<br/>";
+  } else {
+    $msg =  "Error creating the followers table.<br/>";
+  }
+
+  // display the message
+  if($msg !== '') {
+    echo $msg;
+  }
+
+} catch (PDOException $e){
+  echo $e->getMessage();
+}
