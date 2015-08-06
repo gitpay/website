@@ -138,7 +138,7 @@ if (!$user) {
     } else {
       $name = "'$user[name]'";
     }
-    $sql = "insert into users values (NULL, '$nick', $name, $email, $company, $location, $avatar, $blog, NULL) ; ";
+    $sql = "insert into users values ($user[id], '$nick', $name, $email, $company, $location, $avatar, $blog, NULL, DEFAULT, DEFAULT, DEFAULT, DEFAULT) ; ";
     error_log($sql);
 
     $stmt = $conn->prepare($sql);
@@ -147,7 +147,7 @@ if (!$user) {
   }
   catch(Exception $e)
   {
-    //echo $sql . "<br>" . $e->getMessage();
+    error_log($sql . "<br>" . $e->getMessage());
   }
 
 } else {
@@ -223,7 +223,7 @@ try {
   } else {
     $name = "'$user[name]'";
   }
-  $sql = "insert into users values (NULL, '$nick', $name, $email, $company, $location, $avatar, $blog, NULL) ; ";
+  $sql = "insert into users values ($user[id], '$nick', $name, $email, $company, $location, $avatar, $blog, NULL, DEFAULT, DEFAULT, DEFAULT, DEFAULT) ; ";
   error_log($sql);
 
   $stmt = $conn->prepare($sql);
