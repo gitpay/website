@@ -67,7 +67,7 @@ if (!$user) {
   }
   catch(Exception $e)
   {
-    error_log('api error for user : ' + $nick);
+    //error_log('api error for user : ' + $nick);
     header('HTTP/1.1 503 Service Temporarily Unavailable');
     header('Status: 503 Service Temporarily Unavailable');
     header('Retry-After: 3600');//300 seconds
