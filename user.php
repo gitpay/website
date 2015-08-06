@@ -155,6 +155,13 @@ if (!$user) {
 
 try {
   $users = $client->api('user')->followers($nick);
+  for ($i=0; $i<sizeof($users); $i++) {
+    $fid = $users[$i]['id']
+    $sql = "insert into users values ($user[id], $fid, NULL, DEFAULT) ; ";
+    error_log($sql);
+    //$stmt = $conn->prepare($sql);
+    //$stmt->execute();
+  }
 
 }
 catch(Exception $e)
