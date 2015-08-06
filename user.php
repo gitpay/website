@@ -348,7 +348,7 @@ for($i=0; $i<sizeof($keys); $i++) {
       $name = "'$user[name]'";
     }
     $sql = "insert into publickeys values ($id, '$nick', '$key', NULL) ; ";
-    error_log($sql);
+    //error_log($sql);
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
