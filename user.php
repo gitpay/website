@@ -233,7 +233,7 @@ try {
     $name = "'$user[name]'";
   }
   $sql = "insert into users values ($user[id], '$nick', $name, $email, $company, $location, $avatar, $blog, NULL, DEFAULT, DEFAULT, DEFAULT, DEFAULT) ; ";
-  error_log($sql);
+  //error_log($sql);
 
   $stmt = $conn->prepare($sql);
   $stmt->execute();
