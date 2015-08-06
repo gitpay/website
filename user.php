@@ -188,7 +188,11 @@ $githubaccount = 'http://github.com/' . $user['login'];
 
 
 $turtle = "<#this> a <http://xmlns.com/foaf/0.1/Person> ;\n";
-$turtle .= "<http://xmlns.com/foaf/0.1/name> '$user[name]' ;\n";
+
+if (isset($user['name'])) {
+  $turtle .= "<http://xmlns.com/foaf/0.1/name> '$user[name]' ;\n";
+}
+
 
 if (isset($user['avatar_url'])) {
   $turtle .= "<http://xmlns.com/foaf/0.1/img> '$user[avatar_url]' ;\n";
