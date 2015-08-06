@@ -189,7 +189,11 @@ $githubaccount = 'http://github.com/' . $user['login'];
 
 $turtle = "<#this> a <http://xmlns.com/foaf/0.1/Person> ;\n";
 $turtle .= "<http://xmlns.com/foaf/0.1/name> '$user[name]' ;\n";
-$turtle .= "<http://xmlns.com/foaf/0.1/img> '$user[avatar_url]' ;\n";
+
+if (isset($user[avatar_url])) {
+  $turtle .= "<http://xmlns.com/foaf/0.1/img> '$user[avatar_url]' ;\n";
+}
+
 $turtle .= "<http://xmlns.com/foaf/0.1/account> <https://github.com/$user[login]> .\n";
 
 if (isset($preferredURI)) {
