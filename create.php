@@ -213,3 +213,36 @@ EOSQL;
 } catch (PDOException $e){
   echo $e->getMessage();
 }
+
+
+try {
+
+  // set the PDO error mode to exception
+  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  $sql = <<<EOSQL
+  CREATE TABLE `keys` (
+    `key_id` int(11) NOT NULL,
+    `login` VARCHAR(255) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`key_id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+EOSQL;
+
+
+  $r = $dbh->exec($sql);
+
+  if ($r !== false){
+    $msg =  "Tables are created successfully!<br/>";
+  } else {
+    $msg =  "Error creating the keys table.<br/>";
+  }
+
+  // display the message
+  if($msg !== '') {
+    echo $msg;
+  }
+
+} catch (PDOException $e){
+  echo $e->getMessage();
+}
