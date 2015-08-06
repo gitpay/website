@@ -8,7 +8,7 @@ require_once 'vendor/autoload.php';
 include_once('dbconfig.php');
 include_once('github.php');
 
-
+$throttled = false;
 
 $nick = $_REQUEST['user'];
 if (! $nick) {
@@ -67,6 +67,7 @@ if (!$user) {
   }
   catch(Exception $e)
   {
+    $throttled = true;
     error_log('api error for user : ' . $nick);
     header('HTTP/1.1 503 Service Temporarily Unavailable');
     header('Status: 503 Service Temporarily Unavailable');
@@ -101,6 +102,7 @@ try {
 }
 catch(Exception $e)
 {
+  $throttled = true;
   error_log('api error for followers of : ' . $nick);
   header('HTTP/1.1 503 Service Temporarily Unavailable');
   header('Status: 503 Service Temporarily Unavailable');
@@ -117,6 +119,7 @@ try {
 }
 catch(Exception $e)
 {
+  $throttled = true;
   error_log('api error for keys of user : ' . $nick);
   header('HTTP/1.1 503 Service Temporarily Unavailable');
   header('Status: 503 Service Temporarily Unavailable');
