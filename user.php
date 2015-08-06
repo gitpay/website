@@ -158,7 +158,7 @@ try {
   for ($i=0; $i<sizeof($users); $i++) {
     $fid = $users[$i]['id'];
     $sql = "insert into followers values ($user[id], $fid, NULL, DEFAULT) ; ";
-    error_log($sql);
+    //error_log($sql);
     $stmt = $conn->prepare($sql);
     $stmt->execute();
   }
