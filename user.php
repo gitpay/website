@@ -15,13 +15,16 @@ if (! $nick) {
   $nick = 'deiu';
 }
 
-
 $uri = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
+// set the PDO error mode to exception
+$fallbackdb = 'ghtorrent';
+$conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$connfb = new PDO("mysql:host=$host;dbname=$fallbackdb", $username, $password);
+$connfb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 try {
-  $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   // sql to create table
   $sql = "select * from users where login = '$nick' ; ";
@@ -33,14 +36,11 @@ try {
 }
 catch(PDOException $e)
 {
-  //echo $sql . "<br>" . $e->getMessage();
+  error_log($sql . " - " . $e->getMessage());
 }
 
 
 try {
-  $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   // sql to create table
   $sql = "select * from webid where login = '$nick' ; ";
@@ -52,18 +52,14 @@ try {
 }
 catch(PDOException $e)
 {
-  //echo $sql . "<br>" . $e->getMessage();
+  error_log($sql . " - " . $e->getMessage());
 }
 
-
-
-//print_r($row);
 
 if (!$user) {
 
   try {
     $user = $client->api('user')->show($nick);
-
   }
   catch(Exception $e)
   {
@@ -71,22 +67,17 @@ if (!$user) {
 
 
     try {
-      $fallbackdb = 'ghtorrent';
-      $conn = new PDO("mysql:host=$host;dbname=$fallbackdb", $username, $password);
-      // set the PDO error mode to exception
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
       // sql to create table
       $sql = "select * from users where login = '$nick' ; ";
 
-      $stmt = $conn->prepare($sql);
+      $stmt = $connfb->prepare($sql);
       $stmt->execute();
       $user = $stmt->fetch();
 
     }
     catch(PDOException $e)
     {
-      //echo $sql . "<br>" . $e->getMessage();
+      error_log($sql . " - " . $e->getMessage());
     }
 
 
@@ -99,13 +90,9 @@ if (!$user) {
       exit;
 
     }
-    //echo $sql . "<br>" . $e->getMessage();
   }
 
   try {
-    $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // sql to create table
     if(!isset($user['avatar_url'])) {
@@ -147,35 +134,59 @@ if (!$user) {
   }
   catch(Exception $e)
   {
-    error_log($sql . "<br>" . $e->getMessage());
+    error_log($sql . " - " . $e->getMessage());
   }
 
 } else {
 }
 
 
+//print_r($users);
+
 // followers
 try {
   $users = $client->api('user')->followers($nick);
   for ($i=0; $i<sizeof($users); $i++) {
     $fid = $users[$i]['id'];
-    $sql = "insert into followers values ($user[id], $fid, NULL, DEFAULT) ; ";
-    //error_log($sql);
+    $sql = "insert into followers values ($fid, $user[id], NULL, DEFAULT) ; ";
+    error_log($sql);
     $stmt = $conn->prepare($sql);
-    $stmt->execute();
+    try {
+      $stmt->execute();
+    } catch(Exception $e) {
+      error_log( $sql . " : " . $e->getMessage());
+    }
   }
 
-}
-catch(Exception $e)
-{
+} catch(Exception $e) {
   $throttled = true;
   //error_log('api error for followers of : ' . $nick);
   //header('HTTP/1.1 503 Service Temporarily Unavailable');
   //header('Status: 503 Service Temporarily Unavailable');
   //header('Retry-After: 3600');//300 seconds
   //exit;
-  //echo $sql . "<br>" . $e->getMessage();
+  error_log( $sql . "<br>" . $e->getMessage());
 }
+
+
+
+if (!$users) {
+  try {
+
+    // sql to create table
+    $sql = "select u.id as id, u.login as login from followers f inner join users u on f.user_id = u.id where follower_id = $user[id] ; ";
+
+    $stmt = $connfb->prepare($sql);
+    $stmt->execute();
+    $users = $stmt->fetchAll();
+
+  }
+  catch(PDOException $e)
+  {
+    error_log( $sql . " : " . $e->getMessage());
+  }
+}
+
 
 
 
@@ -197,9 +208,6 @@ catch(Exception $e)
 
 
 try {
-  $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   // sql to create table
   if(!isset($user['avatar_url'])) {
@@ -246,17 +254,6 @@ catch(Exception $e)
 
 
 
-//echo "<h3>Profile</h3>";
-//echo "<div>$user[login]</div>";
-//echo "<div>$user[name]</div>";
-//echo "<div>$user[blog]</div>";
-//echo "<div><img src='$user[avatar_url]'/>";
-
-//echo "<h3>Followers</h3>";
-for($i=0; $i<sizeof($users); $i++) {
-  $login = $users[$i]['login'];
-  //echo "<div><a href='user.php?user=$login'>$login</a></div>";
-}
 
 $rank = sizeof($users) * 3;
 if ($rank > 100) {
@@ -264,6 +261,8 @@ if ($rank > 100) {
 }
 
 $preferredURI;
+
+// get webid values
 if ($webid && $webid['preferredURI']) {
   $preferredURI = $webid['preferredURI'];
 
@@ -286,6 +285,7 @@ if ($webid && $webid['preferredURI']) {
   }
 
 }
+
 
 if (isset($ledger) && $ledger['codeRepository']) {
   $arr = split('/', $ledger['codeRepository']);
@@ -352,9 +352,6 @@ for($i=0; $i<sizeof($keys); $i++) {
 
 
   try {
-    $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if(!isset($user['name'])) {
       $name = "NULL";
