@@ -14,6 +14,10 @@ if (! $name) {
   $name = 'Tim';
 }
 
+if (isset($_REQUEST['email'])) {
+  $email = $_REQUEST['email'];
+}
+
 $location = $_REQUEST['location'];
 
 $company = $_REQUEST['company'];
@@ -38,6 +42,8 @@ try {
     $sql = "select * from users where name like '$name%' LIMIT 100 ; ";
   } else if ($_REQUEST['company']) {
     $sql = "select * from users where company like '$company%' LIMIT 100 ; ";
+  } else if ($_REQUEST['email']) {
+    $sql = "select * from users where email like '$email%' LIMIT 100 ; ";
   } else {
     $sql = "select * from users where location like '$location%' LIMIT 100 ; ";
   }
