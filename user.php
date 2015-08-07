@@ -471,8 +471,7 @@ limitations under the License
           <i class="material-icons">more_vert</i>
         </button>
         <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-          <li class="mdl-menu__item">About</li>
-          <li class="mdl-menu__item">Contact</li>
+          <li class="mdl-menu__item"><a class="mdl-color-text--blue-800" href="http://gitpay.org/">About</a></li>
           <li class="mdl-menu__item"><a class="mdl-color-text--blue-800" href="https://github.com/gitpay/code-of-conduct">Code of Conduct</a></li>
         </ul>
       </div>
