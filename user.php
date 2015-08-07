@@ -487,7 +487,7 @@ limitations under the License
             <i class="material-icons">arrow_drop_down</i>
           </button>
           <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-            <li class="mdl-menu__item">hello@example.com</li>
+            <li class="mdl-menu__item"><?php if(isset($user['created_at'])) {echo "Since : " . $user['created_at'];} ?></li>
             <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
           </ul>
         </div>
