@@ -149,12 +149,12 @@ try {
   for ($i=0; $i<sizeof($users); $i++) {
     $fid = $users[$i]['id'];
     $sql = "insert into followers values ($fid, $user[id], NULL, DEFAULT) ; ";
-    error_log($sql);
+    //error_log($sql);
     $stmt = $conn->prepare($sql);
     try {
       $stmt->execute();
     } catch(Exception $e) {
-      error_log( $sql . " : " . $e->getMessage());
+      //error_log( $sql . " : " . $e->getMessage());
     }
   }
 
