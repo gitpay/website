@@ -58,7 +58,7 @@ Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 
-		<title>Gitpay Activity Stream for <?php echo $login ?></title>
+		<title>Gitpay Activity Stream for <?php echo $user ?></title>
 
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
