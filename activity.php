@@ -1,6 +1,46 @@
 <?php
 
-$login = $_REQUEST['user'];
+$user = $_REQUEST['user'];
+
+include_once('dbconfig.php');
+
+
+// set the PDO error mode to exception
+$conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+$feeds = array();
+
+$feeds['github'] = "https://github.com/$user.atom";
+$feeds['twitter'] = "https://twitrss.me/twitter_user_to_rss/?user=$user";
+
+try {
+
+  // sql to create table
+  $sql = "select a.uri from accounts a inner join users u on u.id = a.user_id and u.login = '$user';";
+
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+  $accounts = $stmt->fetchAll();
+
+}
+catch(PDOException $e)
+{
+
+  error_log($sql . " - " . $e->getMessage());
+}
+
+//print_r($accounts);
+foreach ($accounts as $key => $value) {
+	$uri = $value['uri'];
+	if (strpos($uri, 'https://twitter.com') === 0) {
+		$a = explode('/', $uri);
+		$nick = $a[sizeof($a)-1];
+  	$feeds['twitter'] = "https://twitrss.me/twitter_user_to_rss/?user=$nick";
+	}
+
+}
 
 ?>
 
@@ -138,8 +178,10 @@ Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
 
 					// Feeds: Set keys and paths of feeds
 					feeds : {
-						github : 'https://github.com/<?php echo $login ?>.atom',
-				 	  twitter : 'https://twitrss.me/twitter_user_to_rss/?user=<?php echo $login ?>',
+						<?php foreach ($feeds as $key => $value) {
+							echo "$key : '$value', ";
+						}?>
+
 					},
 
 					// Preprocess: manipulated entries data before it's rendered
