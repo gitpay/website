@@ -312,7 +312,7 @@ if (isset($user['name'])) {
 
 
 if (isset($user['avatar_url'])) {
-  $turtle .= "<http://xmlns.com/foaf/0.1/img> '$user[avatar_url]' ;\n";
+  $turtle .= "<http://xmlns.com/foaf/0.1/img> <$user[avatar_url]> ;\n";
 }
 
 $turtle .= "<http://xmlns.com/foaf/0.1/account> <https://github.com/$user[login]> .\n";
