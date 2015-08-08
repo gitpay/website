@@ -262,7 +262,8 @@ try {
   created_at TIMESTAMP NOT NULL
   ) ENGINE=InnoDB
 EOSQL;
-
+// TODO: add constraint
+// ALTER TABLE `accounts` ADD UNIQUE `unique_index`(`user_id`, `uri`);
 
   $r = $dbh->exec($sql);
 
