@@ -478,7 +478,7 @@ limitations under the License
     </header>
     <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
       <header class="demo-drawer-header">
-        <img src="<?php echo $user['avatar_url'] ?>" class="demo-avatar">
+        <img src="<?php if(isset($user['avatar_url'])) {echo $user['avatar_url'];} ?>" class="demo-avatar">
         <div class="demo-avatar-dropdown">
           <span><?php if(isset($user['name'])) {echo $user['name'];} ?></span>
           <div class="mdl-layout-spacer"></div>
