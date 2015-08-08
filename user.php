@@ -307,7 +307,7 @@ $githubaccount = 'http://github.com/' . $user['login'];
 $turtle = "<#this> a <http://xmlns.com/foaf/0.1/Person> ;\n";
 
 if (isset($user['name'])) {
-  $turtle .= "<http://xmlns.com/foaf/0.1/name> '$user[name]' ;\n";
+  $turtle .= "<http://xmlns.com/foaf/0.1/name> \"$user[name]\" ;\n";
 }
 
 
@@ -348,7 +348,7 @@ for($i=0; $i<sizeof($keys); $i++) {
 
 
   $turtle .= "<#this> <http://www.w3.org/ns/auth/cert#key> <#$id> .\n";
-  $turtle .= "<#$id> a <http://www.w3.org/ns/auth/cert#RSAPublicKey> ; <http://www.w3.org/ns/auth/cert#modulus> '$modulus'^^<http://www.w3.org/2001/XMLSchema#hexBinary> ; <http://www.w3.org/ns/auth/cert#exponent> '65537'^^<http://www.w3.org/2001/XMLSchema#integer> .\n";
+  $turtle .= "<#$id> a <http://www.w3.org/ns/auth/cert#RSAPublicKey> ; <http://www.w3.org/ns/auth/cert#modulus> \"$modulus\"^^<http://www.w3.org/2001/XMLSchema#hexBinary> ; <http://www.w3.org/ns/auth/cert#exponent> \"65537\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n";
 
 
   try {
