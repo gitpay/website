@@ -192,11 +192,27 @@ if (!$users) {
 
 try {
   $keys = $client->api('user')->keys($nick);
-
 }
 catch(Exception $e)
 {
   $throttled = true;
+  error_log($e->getMessage());
+
+  try {
+
+    // sql to create table
+    $sql = "select key_id as id, `key` from publickeys where login = '$nick' ;";
+    error_log($sql);
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $keys = $stmt->fetchAll();
+  }
+  catch(PDOException $e)
+  {
+    error_log( $sql . " : " . $e->getMessage());
+  }
+
   //error_log('api error for keys of user : ' . $nick);
   //header('HTTP/1.1 503 Service Temporarily Unavailable');
   //header('Status: 503 Service Temporarily Unavailable');
