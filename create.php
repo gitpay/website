@@ -224,7 +224,7 @@ try {
   CREATE TABLE `publickeys` (
     `key_id` int(11) NOT NULL,
     `login` VARCHAR(255) NOT NULL,
-    `key` VARCHAR(65535) NOT NULL,
+    `key` VARCHAR(16000) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`key_id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8
