@@ -1,0 +1,6 @@
+{
+    "require": {
+        "knplabs/github-api": "~1.4",
+        "semsol/arc2": "^2.2"
+    }
+}
