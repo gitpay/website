@@ -14,16 +14,19 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // check sig
 if ($user && $predicate && $object && $sig) {
-  $key = exec("export HOME=/home/melvin ; git pay keys $user");
+  $home = '/home/ubuntu';
+
+  $key = exec("export HOME=$home ; git pay keys $user");
   $key = str_replace('[', '', $key);
   $key = str_replace(']', '', $key);
 
-  $command = "git pay verify '<http://gitpay.org/$user#this> <$predicate> <$object> .' $sig $key";
-  echo $command;
+  $command = "export HOME=$home ; git pay verify '<http://gitpay.org/$user#this> <$predicate> <$object> .' $sig $key";
   //putenv("NODE_PATH=/usr/local/lib/node_modules:/usr/local/lib/node");
   $response = '';
 
   $response = exec($command);
+
+  echo $response;
 
   if ($response === 'true') {
     try {
@@ -34,6 +37,9 @@ if ($user && $predicate && $object && $sig) {
       $stmt = $conn->prepare($sql);
       $stmt->execute();
       $user = $stmt->fetch();
+
+      echo "account successfully added!";
+
 
     }
     catch(PDOException $e)
