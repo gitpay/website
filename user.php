@@ -24,36 +24,29 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $connfb = new PDO("mysql:host=$host;dbname=$fallbackdb", $username, $password);
 $connfb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-try {
 
-  // sql to create table
-  $sql = "select * from users where login = '$nick' ; ";
+function select($sql, $conn) {
+  try {
 
-  $stmt = $conn->prepare($sql);
-  $stmt->execute();
-  $user = $stmt->fetch();
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $res = $stmt->fetch();
+    return $res;
 
-}
-catch(PDOException $e)
-{
-  error_log($sql . " - " . $e->getMessage());
-}
-
-
-try {
-
-  // sql to create table
-  $sql = "select * from webid where login = '$nick' ; ";
-
-  $stmt = $conn->prepare($sql);
-  $stmt->execute();
-  $webid = $stmt->fetch();
+  }
+  catch(PDOException $e)
+  {
+    error_log($sql . " - " . $e->getMessage());
+  }
 
 }
-catch(PDOException $e)
-{
-  error_log($sql . " - " . $e->getMessage());
-}
+
+$sql = "select * from users where login = '$nick' ; ";
+$user = select($sql, $conn);
+
+$sql = "select * from webid where login = '$nick' ; ";
+$webid = select($sql, $conn);
+
 
 
 if (!$user) {
@@ -65,20 +58,8 @@ if (!$user) {
   {
     $throttled = true;
 
-
-    try {
-      // sql to create table
-      $sql = "select * from users where login = '$nick' ; ";
-
-      $stmt = $connfb->prepare($sql);
-      $stmt->execute();
-      $user = $stmt->fetch();
-
-    }
-    catch(PDOException $e)
-    {
-      error_log($sql . " - " . $e->getMessage());
-    }
+    $sql = "select * from users where login = '$nick' ; ";
+    $user = select($sql, $connfb);
 
 
     if (!$user) {
@@ -140,8 +121,6 @@ if (!$user) {
 } else {
 }
 
-
-//print_r($users);
 
 // followers
 try {
