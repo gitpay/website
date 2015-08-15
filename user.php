@@ -24,7 +24,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $connfb = new PDO("mysql:host=$host;dbname=$fallbackdb", $username, $password);
 $connfb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
+// Helper functions
 function select($sql, $conn) {
   try {
 
@@ -41,6 +41,24 @@ function select($sql, $conn) {
 
 }
 
+function selectAll($sql, $conn) {
+  try {
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $res = $stmt->fetchAll();
+    return $res;
+
+  }
+  catch(PDOException $e)
+  {
+    error_log($sql . " - " . $e->getMessage());
+  }
+
+}
+
+
+// Main
 $sql = "select * from users where login = '$nick' ; ";
 $user = select($sql, $conn);
 
