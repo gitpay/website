@@ -24,10 +24,10 @@ if ($object) {
     $stmt->execute();
     $user = $stmt->fetch();
 
-    $turtle = '<http://$domain/$user[login]#this> <http://xmlns.com/foaf/0.1/nick> <$user[login]> .';
-    $turtle .= '<http://$domain/$user[login]#this> <http://xmlns.com/foaf/0.1/img> <$user[avatar_url]> .';
-    $turtle .= '<http://$domain/$user[login]#this> <http://xmlns.com/foaf/0.1/name> <$user[name]> .';
-    $turtle .= '<http://$domain/$user[login]#this> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <$user[url]> .';
+    $turtle = "<http://$domain/$user[login]#this> <http://xmlns.com/foaf/0.1/nick> <$user[login]> .";
+    $turtle .= "<http://$domain/$user[login]#this> <http://xmlns.com/foaf/0.1/img> <$user[avatar_url]> .";
+    $turtle .= "<http://$domain/$user[login]#this> <http://xmlns.com/foaf/0.1/name> <$user[name]> .";
+    $turtle .= "<http://$domain/$user[login]#this> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <$user[url]> .";
 
     header('Access-Control-Allow-Origin : *');
     header("Vary: Accept");
