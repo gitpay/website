@@ -12,7 +12,7 @@ $days = 36500;
 <html>
 <body>
 
-Thank you for submitting a public key.
+Your public key is.  Please use this value to generate ssh / x.509 certificates and upload to github.
 
 <?php echo $spakc; ?>
 
