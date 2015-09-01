@@ -59,7 +59,7 @@ function selectAll($sql, $conn) {
 
 
 // Main
-$sql = "select * from users where login = '$nick' ; ";
+$sql = "select * from users where login = '$nick' and deleted != 1; ";
 $user = select($sql, $conn);
 
 $sql = "select * from webid where login = '$nick' ; ";
@@ -562,6 +562,8 @@ limitations under the License
                 <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
               </div>
             </div>
+
+
             <div class="demo-separator mdl-cell--1-col"></div>
             <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
               <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
@@ -578,6 +580,21 @@ limitations under the License
                   <i class="material-icons">location_on</i>
                 </div>
               </div>
+
+              <div class="demo-separator mdl-cell--1-col"></div>
+              <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+                <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+                  <h3>Keygen -- Generate Key</h3>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                <form action="keygen.php" method="post">
+                  Encryption: <keygen name="key">
+                  <input type="submit">
+                </form>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </main>
