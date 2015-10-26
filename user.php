@@ -506,7 +506,9 @@ limitations under the License
       </header>
       <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
         <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">home</i>Home</a>
+        <!--
         <a class="mdl-navigation__link" href="<?php echo $user['login'] ?>/activity/"><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Social</a>
+      -->
         <div class="mdl-layout-spacer"></div>
         <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">help_outline</i></a>
       </nav>
@@ -514,11 +516,14 @@ limitations under the License
     <main class="mdl-layout__content mdl-color--grey-100">
       <div class="mdl-grid demo-content">
         <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+          <!--
           <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
             <use xlink:href="#piechart" mask="url(#piemask)" />
             <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1"><?php echo $rank ?><tspan font-size="0.2" dy="-0.07">%</tspan></text>
           </svg>
           <h3>Gitpay Ranking <?php  if (isset($ledger) && $ledger['balance']) echo "<br><a class='mdl-color-text--blue-800' target='_blank' href='w/?walletURI=https:%2F%2Fgitpay.databox.me%2FPublic%2F.wallet%2Fgithub.com%2Flinkeddata%2FSoLiD%2Fwallet%23this&user=". urlencode($preferredURI) ."'>$ledger[balance] bits</a> - <a href='$project'>Project</a>" ; ?></h3>
+          -->
+          <h3>This page is a preview only.  It uses read only public data.  Sign up is scheduled to be turned on in November 2015 on an opt in basis.  Please visit again soon for more features, or use public key tooling with <a href="https://github.com/gitpay/util">nodejs</a></h3>
           </div>
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
             <h3>Followers</h3>
@@ -575,9 +580,10 @@ limitations under the License
                   </ul>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                  <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Change location</a>
+                  <!-- <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Change location</a>
                   <div class="mdl-layout-spacer"></div>
                   <i class="material-icons">location_on</i>
+                  -->
                 </div>
               </div>
 
