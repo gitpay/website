@@ -283,21 +283,35 @@ limitations under the License
           <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
             <h2 class="mdl-card__title-text"><a class="mdl-color-text--blue-800" href="http://graphite.ecs.soton.ac.uk/browser/?uri=<?php echo $uri ?>">Linked Data</a></h2>
           </div>
-          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-            Webid <a href="<?php echo $main ?>"><?php echo $main ?></a>
-          </div>
-          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-            Github <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $githubaccount ?></a>
-          </div>
-          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-            sameAs <a rel="me" href="<?php if (isset($preferredURI)) echo $preferredURI ?>"><?php if (isset($preferredURI))  echo $preferredURI ?></a>
-          </div>
-          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-            seeAlso <a rel="me" href="<?php if (isset($user['blog'])) { echo $user['blog']; } ?>"><?php  if (isset($user['blog'])) { echo $user['blog']; } ?></a>
-          </div>
-          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-            bitcoin <a rel="me" href="<?php if (isset($bitcoin)) echo $bitcoin ?>"><?php if (isset($bitcoin)) echo $bitcoin ?></a>
-          </div>
+          <?php if (!empty($main)) { ?>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              Webid <a href="<?php echo $main ?>"><?php echo $main ?></a>
+            </div>
+          <?php } ?>
+
+          <?php if (!empty($githubaccount)) { ?>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              Github <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $githubaccount ?></a>
+            </div>
+          <?php } ?>
+
+          <?php if (!empty($preferredURI)) { ?>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              sameAs <a rel="me" href="<?php if (isset($preferredURI)) echo $preferredURI ?>"><?php if (isset($preferredURI))  echo $preferredURI ?></a>
+            </div>
+          <?php } ?>
+
+          <?php if (!empty($user['blog'])) { ?>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              seeAlso <a rel="me" href="<?php if (isset($user['blog'])) { echo $user['blog']; } ?>"><?php  if (isset($user['blog'])) { echo $user['blog']; } ?></a>
+            </div>
+          <?php } ?>
+
+          <?php if (!empty($bitcoin)) { ?>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              bitcoin <a rel="me" href="<?php if (isset($bitcoin)) echo $bitcoin ?>"><?php if (isset($bitcoin)) echo $bitcoin ?></a>
+            </div>
+          <?php } ?>
           <div class="mdl-card__actions mdl-card--border">
             <a target="_blank" href="http://www.w3.org/DesignIssues/LinkedData.html" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
           </div>
