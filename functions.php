@@ -115,6 +115,19 @@ function insertFollowers($users, $id, $conn) {
   }
 }
 
+function activateUser($user, $conn) {
+
+  $fid = $users[$i]['id'];
+  $sql = "replace into preferences values (NULL, '$user', 1, NULL) ; ";
+  //error_log($sql);
+  $stmt = $conn->prepare($sql);
+  try {
+    $stmt->execute();
+  } catch(Exception $e) {
+    //error_log( $sql . " : " . $e->getMessage());
+  }
+}
+
 function getProject() {
   if (isset($ledger) && $ledger['codeRepository']) {
     $arr = split('/', $ledger['codeRepository']);

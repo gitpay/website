@@ -99,6 +99,9 @@ $turtle = getTurtle($user, $webid, $users, $keys);
 insertKeys($keys, $nick, $conn);
 writeTurtle();
 
+if ( !empty($_SESSION['login']) ) {
+  activateUser('https://gitpay.org/' . $_SESSION['login'] . '#this', $conn);
+}
 
 ?>
 
