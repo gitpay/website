@@ -226,7 +226,7 @@ limitations under the License
 
           <?php if( !(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true') ) {
             ?>
-            <h3>This account is not yet active.  The page is generated from profile data that has been made public.  All gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in only.  If this your account, and you wish to activate please:</h3>
+            <h3>This account is not yet active.  The page is a preview and generated from profile data that has been made public only.  All gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in only.  If this your account, and you wish to activate please:</h3>
             <div>
                 <p><a class="btn-auth btn-github large" href="oauth.php">Sign in with <b>GitHub</b></a></p>
             </div>
