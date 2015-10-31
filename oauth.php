@@ -54,7 +54,8 @@ if (!isset($_GET['code'])) {
 
         $_SESSION['loggedin'] = true;
         $_SESSION['login'] = $user->getNickname();
-        header("Location: ". $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . $user->getNickname());
+        $scheme = 'https://';
+        header("Location: ". $scheme . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . $user->getNickname());
         exit();
 
     } catch (Exception $e) {
