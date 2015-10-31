@@ -236,7 +236,7 @@ limitations under the License
             echo "<h3>Congratulations, you have logged in.  More features coming soon.<h3>";
           }
           ?>
-
+        </div>
 
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
             <h3>Followers</h3>
