@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if (!isset($cache)) {
   $cache = './data/github-api-cache';
