@@ -236,6 +236,7 @@ limitations under the License
           } else {
             echo "<h3>Congratulations, you have logged in.  More features coming soon.<h3>";
           }
+          ?>
 
 
 
