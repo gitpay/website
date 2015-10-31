@@ -233,7 +233,7 @@ limitations under the License
 
             <?php
           } else {
-            echo "<h3>Congratulations, you have logged in.  You have earnt one reputation point.  More features coming soon.<h3>";
+            echo "<h3>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more features coming soon.<h3>";
           }
           ?>
         </div>
