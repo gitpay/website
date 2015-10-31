@@ -100,6 +100,13 @@ function getUser($nick, $conn = null, $client = null) {
   return $user;
 }
 
+function getActive($nick, $conn) {
+  $sql = "select * from preferences where webid = '$nick'; ";
+  $active = select($sql, $conn);
+
+  return $active;
+}
+
 
 function insertFollowers($users, $id, $conn) {
   for ($i=0; $i<sizeof($users); $i++) {
@@ -117,7 +124,6 @@ function insertFollowers($users, $id, $conn) {
 
 function activateUser($user, $conn) {
 
-  $fid = $users[$i]['id'];
   $sql = "replace into preferences values (NULL, '$user', 1, NULL) ; ";
   //error_log($sql);
   $stmt = $conn->prepare($sql);

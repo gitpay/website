@@ -99,9 +99,12 @@ $turtle = getTurtle($user, $webid, $users, $keys);
 insertKeys($keys, $nick, $conn);
 writeTurtle();
 
+
 if ( !empty($_SESSION['login']) ) {
   activateUser('https://gitpay.org/' . $_SESSION['login'] . '#this', $conn);
 }
+
+$active = getActive('https://gitpay.org/' . $nick . '#this', $conn);
 
 ?>
 
@@ -227,13 +230,14 @@ limitations under the License
           <h3>Gitpay Ranking <?php  if (isset($ledger) && $ledger['balance']) echo "<br><a class='mdl-color-text--blue-800' target='_blank' href='w/?walletURI=https:%2F%2Fgitpay.databox.me%2FPublic%2F.wallet%2Fgithub.com%2Flinkeddata%2FSoLiD%2Fwallet%23this&user=". urlencode($preferredURI) ."'>$ledger[balance] bits</a> - <a href='$project'>Project</a>" ; ?></h3>
         -->
 
-        <?php if( !(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick ) ) {
-          ?>
-          <h3>This account has not yet been activated</h3>
-
-          <?php
+        <?php if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick  ) {
+          echo "<h3>Welcome, " . $nick .  "<h3>";
         } else {
-          echo "<h3>Welcome<h3>";
+          if (!empty($active) && $active['active'] == 1 ) {
+            echo "<h3>This account is active</h3>";
+          } else {
+            echo "<h3>This account has not yet been activated</h3>";
+          }
         }
         ?>
       </div>
