@@ -318,7 +318,7 @@ limitations under the License
           </div>
           <div class="mdl-card__actions mdl-card--border">
             <form action="keygen.php" method="post">
-              Encryption: <keygen name="key">
+              <keygen name="key">
                 <input type="submit">
               </form>
             </div>
