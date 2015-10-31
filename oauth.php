@@ -50,7 +50,12 @@ if (!isset($_GET['code'])) {
         $user = $provider->getResourceOwner($token);
 
         // Use these details to create a new profile
-        printf('Hello %s - testing - login functionality coming soon ...!', $user->getNickname());
+        //printf('Hello %s - testing - login functionality coming soon ...!', $user->getNickname());
+
+        $_SESSION['loggedin'] = true;
+        $_SESSION['login'] = $user->getNickname();
+        header("Location: ". $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . $user->getNickname());
+        exit();
 
     } catch (Exception $e) {
 
