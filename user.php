@@ -233,7 +233,7 @@ limitations under the License
 
             <?php
           } else {
-            echo "<h3>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more features coming soon.<h3>";
+            echo "<h3>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more <a target=\"_blank\" href=\"https://melvincarvalho.gitbooks.io/gitpay/content/\">features</a> coming soon.<h3>";
           }
           ?>
         </div>
