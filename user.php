@@ -299,7 +299,7 @@ limitations under the License
             bitcoin <a rel="me" href="<?php if (isset($bitcoin)) echo $bitcoin ?>"><?php if (isset($bitcoin)) echo $bitcoin ?></a>
           </div>
           <div class="mdl-card__actions mdl-card--border">
-            <a href="http://www.w3.org/DesignIssues/LinkedData.html" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
+            <a target="_blank" href="http://www.w3.org/DesignIssues/LinkedData.html" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
           </div>
         </div>
 
