@@ -192,147 +192,155 @@ limitations under the License
     <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
       <header class="demo-drawer-header">
         <img src="<?php if(isset($user['avatar_url'])) { echo $user['avatar_url']; }else { echo 'https://avatars.githubusercontent.com/u/58120?v=3'; } ?>" class="demo-avatar">
-        <div class="demo-avatar-dropdown">
-          <span><?php if(isset($user['name'])) {echo $user['name'];} ?></span>
+          <div class="demo-avatar-dropdown">
+            <span><?php if(isset($user['name'])) {echo $user['name'];} ?></span>
+            <div class="mdl-layout-spacer"></div>
+            <button id="btn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+              <i class="material-icons">arrow_drop_down</i>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="btn">
+              <li class="mdl-menu__item"><?php if(isset($user['created_at'])) {echo "Since : " . $user['created_at'];} ?></li>
+              </ul>
+            </div>
+          </header>
+          <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+            <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">home</i>Home</a>
+            <a class="mdl-navigation__link" target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/"><i class="mdl-color-text--blue-grey-400 material-icons">book</i>Documentation</a>
+            <!--
+            <a class="mdl-navigation__link" href="<?php echo $user['login'] ?>/activity/"><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Social</a>
+          -->
           <div class="mdl-layout-spacer"></div>
-          <button id="btn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-            <i class="material-icons">arrow_drop_down</i>
-          </button>
-          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="btn">
-            <li class="mdl-menu__item"><?php if(isset($user['created_at'])) {echo "Since : " . $user['created_at'];} ?></li>
-          </ul>
-        </div>
-      </header>
-      <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-        <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">home</i>Home</a>
-        <a class="mdl-navigation__link" target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/"><i class="mdl-color-text--blue-grey-400 material-icons">book</i>Documentation</a>
-        <!--
-        <a class="mdl-navigation__link" href="<?php echo $user['login'] ?>/activity/"><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Social</a>
-      -->
-        <div class="mdl-layout-spacer"></div>
-        <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">help_outline</i></a>
-      </nav>
-    </div>
-    <main class="mdl-layout__content mdl-color--grey-100">
-      <div class="mdl-grid demo-content">
-        <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-          <!--
-          <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">help_outline</i></a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+          <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+            <!--
+            <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
             <use xlink:href="#piechart" mask="url(#piemask)" />
             <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1"><?php echo $rank ?><tspan font-size="0.2" dy="-0.07">%</tspan></text>
           </svg>
           <h3>Gitpay Ranking <?php  if (isset($ledger) && $ledger['balance']) echo "<br><a class='mdl-color-text--blue-800' target='_blank' href='w/?walletURI=https:%2F%2Fgitpay.databox.me%2FPublic%2F.wallet%2Fgithub.com%2Flinkeddata%2FSoLiD%2Fwallet%23this&user=". urlencode($preferredURI) ."'>$ledger[balance] bits</a> - <a href='$project'>Project</a>" ; ?></h3>
-          -->
+        -->
 
-          <?php if( !(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick ) ) {
-            ?>
-            <h3>This account is not yet active.  The page is a preview and generated from profile data that has been made public only.  All gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in only.  If this your account, and you wish to activate please:</h3>
-            <div>
-                <p><a class="btn-auth btn-github large" href="oauth.php">Sign in with <b>GitHub</b></a></p>
-            </div>
-
-            <?php
-          } else {
-            echo "<h3>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more <a target=\"_blank\" href=\"https://melvincarvalho.gitbooks.io/gitpay/content/\">features</a> coming soon.<h3>";
-          }
+        <?php if( !(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick ) ) {
           ?>
+          <h3>This account has not yet been activated</h3>
+
+          <?php
+        } else {
+          echo "<h3>Welcome<h3>";
+        }
+        ?>
+      </div>
+
+      <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
+        <h3>Info</h3>
+
+        <?php if( !(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick ) ) {
+          ?>
+          <h3>The page is a preview and generated from profile data that has been made public only.  All gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in only.  If this your account, and you wish to activate please:</h3>
+          <div>
+            <p><a class="btn-auth btn-github large" href="oauth.php">Sign in with <b>GitHub</b></a></p>
+          </div>
+
+          <?php
+        } else {
+          echo "<h3>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more <a target=\"_blank\" href=\"https://melvincarvalho.gitbooks.io/gitpay/content/\">features</a> coming soon.<h3>";
+        }
+        ?>
+
+        <h3>Followers</h3>
+
+        <?php
+        for($i=0; $i<sizeof($users); $i++) {
+          $login = $users[$i]['login'];
+          echo "<div><a href='$login'>$login</a></div>";
+        }
+        ?>
+
+      </div>
+
+
+
+      <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+        <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+          <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+            <h2 class="mdl-card__title-text"><a class="mdl-color-text--blue-800" href="http://graphite.ecs.soton.ac.uk/browser/?uri=<?php echo $uri ?>">Linked Data</a></h2>
+          </div>
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            Webid <a href="<?php echo $main ?>"><?php echo $main ?></a>
+          </div>
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            Github <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $githubaccount ?></a>
+          </div>
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            sameAs <a rel="me" href="<?php if (isset($preferredURI)) echo $preferredURI ?>"><?php if (isset($preferredURI))  echo $preferredURI ?></a>
+          </div>
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            seeAlso <a rel="me" href="<?php if (isset($user['blog'])) { echo $user['blog']; } ?>"><?php  if (isset($user['blog'])) { echo $user['blog']; } ?></a>
+          </div>
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            bitcoin <a rel="me" href="<?php if (isset($bitcoin)) echo $bitcoin ?>"><?php if (isset($bitcoin)) echo $bitcoin ?></a>
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
+          </div>
         </div>
 
-          <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-            <h3>Followers</h3>
 
-            <?php
-            for($i=0; $i<sizeof($users); $i++) {
-              $login = $users[$i]['login'];
-              echo "<div><a href='$login'>$login</a></div>";
-            }
-            ?>
-
-
-            <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
-              <use xlink:href="#chart"/>
-            </svg>
-            <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
-              <use xlink:href="#chart"/>
-            </svg>
-          </div>
-          <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
-            <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
-              <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
-                <h2 class="mdl-card__title-text"><a class="mdl-color-text--blue-800" href="http://graphite.ecs.soton.ac.uk/browser/?uri=<?php echo $uri ?>">Linked Data</a></h2>
-              </div>
-              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                Webid <a href="<?php echo $main ?>"><?php echo $main ?></a>
-              </div>
-              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                Github <a rel="me" href="<?php echo $githubaccount ?>"><?php echo $githubaccount ?></a>
-              </div>
-              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                sameAs <a rel="me" href="<?php if (isset($preferredURI)) echo $preferredURI ?>"><?php if (isset($preferredURI))  echo $preferredURI ?></a>
-              </div>
-              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                seeAlso <a rel="me" href="<?php if (isset($user['blog'])) { echo $user['blog']; } ?>"><?php  if (isset($user['blog'])) { echo $user['blog']; } ?></a>
-              </div>
-              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                bitcoin <a rel="me" href="<?php if (isset($bitcoin)) echo $bitcoin ?>"><?php if (isset($bitcoin)) echo $bitcoin ?></a>
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
-              </div>
+        <div class="demo-separator mdl-cell--1-col"></div>
+        <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+          <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+            <h3>Location</h3>
+            <ul>
+              <li>
+                <span><a class="mdl-color-text--white" target="_blank" href="http://www.geonames.org/search.html?q=<?php if (isset($user['location'])) { echo $user['location']; } ?>"><?php if (isset($user['location'])) { echo $user['location']; } ?></span>
+                </li>
+              </ul>
             </div>
+            <div class="mdl-card__actions mdl-card--border">
+              <!-- <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Change location</a>
+              <div class="mdl-layout-spacer"></div>
+              <i class="material-icons">location_on</i>
+            -->
+          </div>
+        </div>
 
-
-            <div class="demo-separator mdl-cell--1-col"></div>
-            <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
-              <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-                <h3>Location</h3>
-                <ul>
-                  <li>
-                    <span><a class="mdl-color-text--white" target="_blank" href="http://www.geonames.org/search.html?q=<?php if (isset($user['location'])) { echo $user['location']; } ?>"><?php if (isset($user['location'])) { echo $user['location']; } ?></span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                  <!-- <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Change location</a>
-                  <div class="mdl-layout-spacer"></div>
-                  <i class="material-icons">location_on</i>
-                  -->
-                </div>
-              </div>
-
-              <div class="demo-separator mdl-cell--1-col"></div>
-              <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
-                <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-                  <h3>Keygen -- Generate Key</h3>
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                <form action="keygen.php" method="post">
-                  Encryption: <keygen name="key">
-                  <input type="submit">
-                </form>
-                </div>
-              </div>
-
-
+        <div class="demo-separator mdl-cell--1-col"></div>
+        <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+          <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+            <h3>Keygen -- Generate Key</h3>
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <form action="keygen.php" method="post">
+              Encryption: <keygen name="key">
+                <input type="submit">
+              </form>
             </div>
           </div>
-        </main>
+
+
+        </div>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
-        <defs>
-          <mask id="piemask" maskContentUnits="objectBoundingBox">
-            <circle cx=0.5 cy=0.5 r=0.49 fill="white" />
-            <circle cx=0.5 cy=0.5 r=0.40 fill="black" />
-          </mask>
-          <g id="piechart">
-            <circle cx=0.5 cy=0.5 r=0.5 />
-            <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
-          </g>
-        </defs>
-      </svg>
+    </main>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
+    <defs>
+      <mask id="piemask" maskContentUnits="objectBoundingBox">
+        <circle cx=0.5 cy=0.5 r=0.49 fill="white" />
+        <circle cx=0.5 cy=0.5 r=0.40 fill="black" />
+      </mask>
+      <g id="piechart">
+        <circle cx=0.5 cy=0.5 r=0.5 />
+        <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
+      </g>
+    </defs>
+  </svg>
 
-      <?php print_r($_SESSION); ?>
+  <?php print_r($_SESSION); ?>
 
-      <script src="material.min.js"></script>
-    </body>
-    </html>
+  <script src="material.min.js"></script>
+</body>
+</html>
