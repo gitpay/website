@@ -152,6 +152,7 @@ limitations under the License
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="material.min.css">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="auth-buttons.css">
 <style>
 #view-source {
   position: fixed;
@@ -194,12 +195,11 @@ limitations under the License
         <div class="demo-avatar-dropdown">
           <span><?php if(isset($user['name'])) {echo $user['name'];} ?></span>
           <div class="mdl-layout-spacer"></div>
-          <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+          <button id="btn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
             <i class="material-icons">arrow_drop_down</i>
           </button>
-          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="btn">
             <li class="mdl-menu__item"><?php if(isset($user['created_at'])) {echo "Since : " . $user['created_at'];} ?></li>
-            <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
           </ul>
         </div>
       </header>
@@ -223,8 +223,17 @@ limitations under the License
           </svg>
           <h3>Gitpay Ranking <?php  if (isset($ledger) && $ledger['balance']) echo "<br><a class='mdl-color-text--blue-800' target='_blank' href='w/?walletURI=https:%2F%2Fgitpay.databox.me%2FPublic%2F.wallet%2Fgithub.com%2Flinkeddata%2FSoLiD%2Fwallet%23this&user=". urlencode($preferredURI) ."'>$ledger[balance] bits</a> - <a href='$project'>Project</a>" ; ?></h3>
           -->
-          <h3>This page is a preview only.  It uses read only public data.  Sign up is scheduled to be turned on in November 2015 on an opt in basis.  Please visit again soon for more features, or use public key tooling with <a href="https://github.com/gitpay/util">nodejs</a></h3>
+
+          <h3>This account is not yet active.  The page is generated from profile data that has been made public.  All gitpay <a targe="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in only.  If this your account, and you wish to activate please:</h3>
+
+          <div>
+              <p><a class="btn-auth btn-github large" href="oauth.php">Sign in with <b>GitHub</b></a></p>
           </div>
+
+          </div>
+
+
+
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
             <h3>Followers</h3>
 
