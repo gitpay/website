@@ -282,3 +282,35 @@ EOSQL;
 } catch (PDOException $e){
   echo $e->getMessage();
 }
+
+
+try {
+
+  // set the PDO error mode to exception
+  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  $sql = <<<EOSQL
+  CREATE TABLE preferences (
+  id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  webid INT(11) NOT NULL,
+  active INT(11) NULL,
+  created_at TIMESTAMP NOT NULL
+  ) ENGINE=InnoDB
+EOSQL;
+
+  $r = $dbh->exec($sql);
+
+  if ($r !== false){
+    $msg =  "Tables are created successfully!<br/>";
+  } else {
+    $msg =  "Error creating the preferences table.<br/>";
+  }
+
+  // display the message
+  if($msg !== '') {
+    echo $msg;
+  }
+
+} catch (PDOException $e){
+  echo $e->getMessage();
+}
