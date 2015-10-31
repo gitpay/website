@@ -261,7 +261,7 @@ try {
   predicate VARCHAR(255) NOT NULL,
   uri VARCHAR(255) NOT NULL,
   created_at TIMESTAMP NOT NULL,
-  UNIQUE KEY `unique_index` (`user_id`,`uri`)  
+  UNIQUE KEY `unique_index` (`user_id`,`uri`)
   ) ENGINE=InnoDB
 EOSQL;
 
@@ -291,7 +291,7 @@ try {
   $sql = <<<EOSQL
   CREATE TABLE preferences (
   id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  webid INT(11) NOT NULL,
+  webid VARCHAR(255) NOT NULL,
   active INT(11) NULL,
   created_at TIMESTAMP NOT NULL,
   UNIQUE KEY `webid` (`webid`)
