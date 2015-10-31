@@ -14,7 +14,7 @@ $provider = new League\OAuth2\Client\Provider\Github([
 
 $options = [
     'state' => rand(1, 999999999),
-    'scope' => ['user','read:public_key', 'write:public_key'] // array or string
+    'scope' => ['user'] // array or string
 ];
 
 
