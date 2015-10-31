@@ -237,19 +237,22 @@ limitations under the License
 
       <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
         <h3>Info</h3>
+        <hr>
 
         <?php if( !(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick ) ) {
           ?>
-          <h3>The page is a preview and generated from profile data that has been made public only.  All gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in only.  If this your account, and you wish to activate please:</h3>
+          <h4>The page is a preview and generated from profile data that has been made public only.  All gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in only.  If this your account, and you wish to activate please:</h4>
           <div>
             <p><a class="btn-auth btn-github large" href="oauth.php">Sign in with <b>GitHub</b></a></p>
           </div>
 
           <?php
         } else {
-          echo "<h3>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more <a target=\"_blank\" href=\"https://melvincarvalho.gitbooks.io/gitpay/content/\">features</a> coming soon.<h3>";
+          echo "<h4>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more <a target=\"_blank\" href=\"https://melvincarvalho.gitbooks.io/gitpay/content/\">features</a> coming soon.<h4>";
         }
         ?>
+
+        <hr>
 
         <h3>Followers</h3>
 
