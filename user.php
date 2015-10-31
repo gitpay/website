@@ -237,7 +237,6 @@ limitations under the License
           }
           ?>
 
-          <?php print_r($_SESSION); ?>
 
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
             <h3>Followers</h3>
@@ -332,6 +331,7 @@ limitations under the License
         </defs>
       </svg>
 
+      <?php print_r($_SESSION); ?>
 
       <script src="material.min.js"></script>
     </body>
