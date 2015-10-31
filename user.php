@@ -231,14 +231,14 @@ limitations under the License
         -->
 
         <?php if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick  ) {
-          echo "<h3>Welcome, " . $nick .  "<h3>";
-        } else {
-          if (!empty($active) && $active['active'] == 1 ) {
-            echo "<h3>This account is active</h3>";
+            echo "<h3>Welcome, " . $nick .  "<h3>";
           } else {
-            echo "<h3>This account has not yet been activated</h3>";
+            if (!empty($active) && $active['active'] == 1 ) {
+              echo "<h3>This account is active</h3>";
+            } else {
+              echo "<h3>This account has not yet been activated</h3>";
+            }
           }
-        }
         ?>
       </div>
 
@@ -246,20 +246,24 @@ limitations under the License
         <h3>Info</h3>
         <hr>
 
-        <?php if( !(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick ) ) {
-          ?>
-          <h4>The page is a preview and generated from profile data that has been made public only.  All gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in.  If this your account, and you wish to activate please:</h4>
-          <div>
-            <p><a class="btn-auth btn-github large" href="oauth.php">Sign in with <b>GitHub</b></a></p>
-          </div>
+        <?php if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick  ) {
+            echo "<h4>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more <a target=\"_blank\" href=\"https://melvincarvalho.gitbooks.io/gitpay/content/\">features</a> coming soon.<h4>";
+          } else {
+            if (!empty($active) && $active['active'] == 1 ) {
+            } else {
+              ?>
 
-          <?php
-        } else {
-          echo "<h4>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more <a target=\"_blank\" href=\"https://melvincarvalho.gitbooks.io/gitpay/content/\">features</a> coming soon.<h4>";
-        }
+              <h4>The page is a preview and generated from profile data that has been made public only.  All gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in.  If this your account, and you wish to activate please:</h4>
+              <div>
+                <p><a class="btn-auth btn-github large" href="oauth.php">Sign in with <b>GitHub</b></a></p>
+              </div>
+              <hr>
+
+              <?php
+            }
+          }
         ?>
 
-        <hr>
 
         <h3>Followers</h3>
 
@@ -307,50 +311,50 @@ limitations under the License
             <ul>
               <li>
                 <span><a class="mdl-color-text--white" target="_blank" href="http://www.geonames.org/search.html?q=<?php if (isset($user['location'])) { echo $user['location']; } ?>"><?php if (isset($user['location'])) { echo $user['location']; } ?></a></span>
-                </li>
-              </ul>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-              <!-- <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Change location</a>
-              <div class="mdl-layout-spacer"></div>
-              <i class="material-icons">location_on</i>
-            -->
-          </div>
-        </div>
-
-        <div class="demo-separator mdl-cell--1-col"></div>
-        <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
-          <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-            <h3>Keygen -- Generate Key</h3>
+              </li>
+            </ul>
           </div>
           <div class="mdl-card__actions mdl-card--border">
-            <form action="keygen.php" method="post">
-              <keygen name="key">
-                <input type="submit">
-              </form>
-            </div>
-          </div>
-
-
+            <!-- <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Change location</a>
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons">location_on</i>
+          -->
         </div>
       </div>
-    </main>
-  </div>
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
-    <defs>
-      <mask id="piemask" maskContentUnits="objectBoundingBox">
-        <circle cx=0.5 cy=0.5 r=0.49 fill="white" />
-        <circle cx=0.5 cy=0.5 r=0.40 fill="black" />
-      </mask>
-      <g id="piechart">
-        <circle cx=0.5 cy=0.5 r=0.5 />
-        <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
-      </g>
-    </defs>
-  </svg>
 
-  <?php print_r($_SESSION); ?>
+      <div class="demo-separator mdl-cell--1-col"></div>
+      <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+        <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+          <h3>Keygen -- Generate Key</h3>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <form action="keygen.php" method="post">
+            <keygen name="key">
+              <input type="submit">
+            </form>
+          </div>
+        </div>
 
-  <script src="material.min.js"></script>
+
+      </div>
+    </div>
+  </main>
+</div>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
+  <defs>
+    <mask id="piemask" maskContentUnits="objectBoundingBox">
+      <circle cx=0.5 cy=0.5 r=0.49 fill="white" />
+      <circle cx=0.5 cy=0.5 r=0.40 fill="black" />
+    </mask>
+    <g id="piechart">
+      <circle cx=0.5 cy=0.5 r=0.5 />
+      <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
+    </g>
+  </defs>
+</svg>
+
+<?php print_r($_SESSION); ?>
+
+<script src="material.min.js"></script>
 </body>
 </html>
