@@ -224,13 +224,18 @@ limitations under the License
           <h3>Gitpay Ranking <?php  if (isset($ledger) && $ledger['balance']) echo "<br><a class='mdl-color-text--blue-800' target='_blank' href='w/?walletURI=https:%2F%2Fgitpay.databox.me%2FPublic%2F.wallet%2Fgithub.com%2Flinkeddata%2FSoLiD%2Fwallet%23this&user=". urlencode($preferredURI) ."'>$ledger[balance] bits</a> - <a href='$project'>Project</a>" ; ?></h3>
           -->
 
-          <h3>This account is not yet active.  The page is generated from profile data that has been made public.  All gitpay <a targe="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in only.  If this your account, and you wish to activate please:</h3>
+          <?php if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ) {
+            ?>
+            <h3>This account is not yet active.  The page is generated from profile data that has been made public.  All gitpay <a targe="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/">features</a> are opt in only.  If this your account, and you wish to activate please:</h3>
+            <div>
+                <p><a class="btn-auth btn-github large" href="oauth.php">Sign in with <b>GitHub</b></a></p>
+            </div>
 
-          <div>
-              <p><a class="btn-auth btn-github large" href="oauth.php">Sign in with <b>GitHub</b></a></p>
-          </div>
-
-          </div>
+            </div>
+            <?php
+          } else {
+            echo "<h3>Congratulations, you have logged in.  More features coming soon.<h3>";
+          }
 
 
 
