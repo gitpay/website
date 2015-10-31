@@ -332,6 +332,9 @@ limitations under the License
           </g>
         </defs>
       </svg>
+
+      <?php print_r($_SESSION); ?>
+
       <script src="material.min.js"></script>
     </body>
     </html>
