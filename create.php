@@ -260,11 +260,10 @@ try {
   user_id INT(11) NOT NULL,
   predicate VARCHAR(255) NOT NULL,
   uri VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP NOT NULL
+  created_at TIMESTAMP NOT NULL,
+  UNIQUE KEY `unique_index` (`user_id`,`uri`)  
   ) ENGINE=InnoDB
 EOSQL;
-// TODO: add constraint
-// ALTER TABLE `accounts` ADD UNIQUE `unique_index`(`user_id`, `uri`);
 
   $r = $dbh->exec($sql);
 
@@ -294,7 +293,8 @@ try {
   id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   webid INT(11) NOT NULL,
   active INT(11) NULL,
-  created_at TIMESTAMP NOT NULL
+  created_at TIMESTAMP NOT NULL,
+  UNIQUE KEY `webid` (`webid`)
   ) ENGINE=InnoDB
 EOSQL;
 
