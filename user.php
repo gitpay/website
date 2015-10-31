@@ -231,14 +231,13 @@ limitations under the License
                 <p><a class="btn-auth btn-github large" href="oauth.php">Sign in with <b>GitHub</b></a></p>
             </div>
 
-            </div>
             <?php
           } else {
             echo "<h3>Congratulations, you have logged in.  More features coming soon.<h3>";
           }
           ?>
 
-
+          <?php print_r($_SESSION); ?>
 
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
             <h3>Followers</h3>
