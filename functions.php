@@ -138,13 +138,31 @@ function addBitcoin($bitcoin, $conn) {
   if (empty($_SESSION['login'])) {
     return;
   }
-  $sql = "update webid set bitcoin = '$bitcoin' where login = '$_SESSION[login]' ; ";
+  $sql = "update webid set bitcoin = '" . toBitcoinURI($bitcoin) . "' where login = '$_SESSION[login]' ; ";
   error_log($sql);
   $stmt = $conn->prepare($sql);
   try {
     $stmt->execute();
   } catch(Exception $e) {
     //error_log( $sql . " : " . $e->getMessage());
+  }
+}
+
+function toBitcoinURI($address) {
+  $scheme = 'bitcoin:';
+  if ( strpos( $address, $scheme ) === false ) {
+    return $scheme . $address;
+  } else {
+    return $address;
+  }
+}
+
+function fromBitcoinURI($address) {
+  $scheme = 'bitcoin:';
+  if ( strpos( $address, $scheme ) === false ) {
+    return $address;
+  } else {
+    return substr($address, strlen($scheme));
   }
 }
 

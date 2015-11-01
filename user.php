@@ -260,7 +260,7 @@ limitations under the License
 
           ?>
           <h3>Donations</h3>
-          <h4>To set up a donations add your bitcoin address to beneath</h4>
+          <h4>To set up donations add your bitcoin address to beneath</h4>
             <form action="" method="POST">
               <div class="mdl-textfield mdl-js-textfield">
                 <input class="mdl-textfield__input" type="text" name="bitcoin" id="bitcoin" />
@@ -351,7 +351,8 @@ limitations under the License
 
                     <?php if (!empty($bitcoin)) { ?>
                       <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                        bitcoin <a rel="me" href="<?php if (isset($bitcoin)) echo $bitcoin ?>"><?php if (isset($bitcoin)) echo $bitcoin ?></a>
+                        bitcoin <a rel="me" href="<?php if (isset($bitcoin)) echo $bitcoin ?>"><?php if (isset($bitcoin)) echo fromBitcoinURI($bitcoin) ?></a>
+                        <a target="_blank" href="https://blockchain.info/address/<?php if (isset($bitcoin)) echo fromBitcoinURI($bitcoin) ?>"><i class="mdl-color-text--blue-grey-400 material-icons">information</i></a>
                       </div>
                       <?php } ?>
                       <div class="mdl-card__actions mdl-card--border">
