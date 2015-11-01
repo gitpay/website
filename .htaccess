@@ -3,6 +3,7 @@ RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_METHOD} !POST [NC]
 
 RewriteRule ^([^?]*)/activity/$ activity.php?user=$1 [NC,L,QSA]
 RewriteRule ^([^/]*)/([^/]*)$ repo.php?user=$1&repo=$2 [NC,L,QSA]

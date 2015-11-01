@@ -139,7 +139,7 @@ function addBitcoin($bitcoin, $conn) {
     return;
   }
   $sql = "update webid set bitcoin = '$bitcoin' where login = '$_SESSION[login]' ; ";
-  //error_log($sql);
+  error_log($sql);
   $stmt = $conn->prepare($sql);
   try {
     $stmt->execute();
@@ -193,7 +193,7 @@ function getRank($users) {
 
 function getFollowers($nick, $conn = null, $client = null) {
   if ($conn) {
-    $sql = "select u.id as id, u.login as login from followers f inner join users u on f.user_id = u.id where follower_id = $nick ; ";
+    $sql = "select u.id as id, u.login as login from followers f inner join users u on f.user_id = u.id where follower_id = '$nick' ; ";
     $followers = selectAll($sql, $conn);
   } else if ($client) {
     $followers = $client->api('user')->followers($nick);

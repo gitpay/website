@@ -8,6 +8,7 @@ include_once('github.php');
 include_once('functions.php');
 
 
+
 // query parameters
 if ((isset($_REQUEST['user'])) && (!empty($_REQUEST['user']))) {
   $nick= $_REQUEST['user'];
@@ -15,9 +16,7 @@ if ((isset($_REQUEST['user'])) && (!empty($_REQUEST['user']))) {
   $nick = 'deiu';
 }
 
-if ((isset($_REQUEST['bitcoin'])) && (!empty($_REQUEST['bitcoin']))) {
-  addBitcoin($_REQUEST['bitcoin'], $conn);
-}
+
 
 
 
@@ -33,6 +32,11 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $connfb = new PDO("mysql:host=$host;dbname=$fallbackdb", $username, $password);
 $connfb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+
+// process forms
+if ((isset($_REQUEST['bitcoin'])) && (!empty($_REQUEST['bitcoin']))) {
+  addBitcoin($_REQUEST['bitcoin'], $conn);
+}
 
 
 // Main
@@ -259,8 +263,8 @@ limitations under the License
           <h4>To set up a donations add your bitcoin address to beneath</h4>
             <form action="" method="POST">
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="bitcoin" />
-                <label class="mdl-textfield__label" for="sample1">bitcoin address</label>
+                <input class="mdl-textfield__input" type="text" name="bitcoin" id="bitcoin" />
+                <label class="mdl-textfield__label" for="bitcoin">bitcoin address</label>
               </div>
             </form>
           <hr>
