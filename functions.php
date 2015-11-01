@@ -331,7 +331,7 @@ function getTurtle($user, $webid, $users, $keys) {
   }
 }
 
-function writeTurtle() {
+function writeTurtle($turtle) {
   header('Access-Control-Allow-Origin : *');
   header("Vary: Accept");
   if (stristr($_SERVER["HTTP_ACCEPT"], "application/turtle")) {

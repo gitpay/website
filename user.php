@@ -106,7 +106,7 @@ if ($webid && $webid['preferredURI']) {
 
 $turtle = getTurtle($user, $webid, $users, $keys);
 insertKeys($keys, $nick, $conn);
-writeTurtle();
+writeTurtle($turtle);
 
 
 if ( !empty($_SESSION['login']) ) {
