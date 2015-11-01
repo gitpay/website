@@ -15,6 +15,11 @@ if ((isset($_REQUEST['user'])) && (!empty($_REQUEST['user']))) {
   $nick = 'deiu';
 }
 
+if ((isset($_REQUEST['bitcoin'])) && (!empty($_REQUEST['bitcoin']))) {
+  addBitcoin($_REQUEST['bitcoin'], $conn);
+}
+
+
 
 // init
 $throttled = false;
@@ -248,6 +253,19 @@ limitations under the License
 
         <?php if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick  ) {
           echo "<h4>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more <a target=\"_blank\" href=\"https://melvincarvalho.gitbooks.io/gitpay/content/\">features</a> coming soon.<h4><hr>";
+
+          ?>
+          <h3>Donations</h3>
+          <h4>To set up a donations add your bitcoin address to beneath</h4>
+            <form action="" method="POST">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="bitcoin" />
+                <label class="mdl-textfield__label" for="sample1">bitcoin address</label>
+              </div>
+            </form>
+          <hr>
+          <?php
+
         } else {
           if (!empty($active) && $active['active'] == 1 ) {
           } else {
@@ -275,8 +293,10 @@ limitations under the License
               <use xlink:href="#piechart" mask="url(#piemask)" />
               <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1"><?php echo $rank ?><tspan font-size="0.2" dy="-0.07">%</tspan></text>
             </svg>
-            <h3>Gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/chapter5.html">Ranking</a></h3>
+            <h3>Gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/chapter5.html">Reputation</a></h3>
             </div>
+            <hr>
+
             <?php
           } else {
           }

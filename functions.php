@@ -134,6 +134,20 @@ function activateUser($user, $conn) {
   }
 }
 
+function addBitcoin($bitcoin, $conn) {
+  if (empty($_SESSION['login'])) {
+    return;
+  }
+  $sql = "update webid set bitcoin = '$bitcoin' where login = '$_SESSION[login]' ; ";
+  //error_log($sql);
+  $stmt = $conn->prepare($sql);
+  try {
+    $stmt->execute();
+  } catch(Exception $e) {
+    //error_log( $sql . " : " . $e->getMessage());
+  }
+}
+
 function getProject() {
   if (isset($ledger) && $ledger['codeRepository']) {
     $arr = split('/', $ledger['codeRepository']);
