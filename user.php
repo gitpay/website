@@ -262,10 +262,12 @@ limitations under the License
           <h3>Donations</h3>
           <h4>To set up donations add your bitcoin address to beneath</h4>
             <form action="" method="POST">
-              <div class="mdl-textfield mdl-js-textfield">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" name="bitcoin" id="bitcoin" />
                 <label class="mdl-textfield__label" for="bitcoin">bitcoin address</label>
               </div>
+
+
             </form>
           <hr>
           <?php
