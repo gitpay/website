@@ -138,6 +138,14 @@ function addBitcoin($bitcoin, $conn) {
   if (empty($_SESSION['login'])) {
     return;
   }
+  $sql = " insert into webid values (NULL, '" . $_SESSION['login'] . "', NULL, NULL, NULL, NULL) ; ";
+  error_log($sql);
+  $stmt = $conn->prepare($sql);
+  try {
+    $stmt->execute();
+  } catch(Exception $e) {
+    //error_log( $sql . " : " . $e->getMessage());
+  }
   $sql = "update webid set bitcoin = '" . toBitcoinURI($bitcoin) . "' where login = '$_SESSION[login]' ; ";
   error_log($sql);
   $stmt = $conn->prepare($sql);
