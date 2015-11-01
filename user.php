@@ -210,7 +210,7 @@ limitations under the License
             </div>
           </header>
           <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-            <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">home</i>Home</a>
+            <a class="mdl-navigation__link" href="<?php if (!empty($_SESSION['login'])) echo $_SESSION['login'] ?>"><i class="mdl-color-text--blue-grey-400 material-icons">home</i>Home</a>
             <a class="mdl-navigation__link" target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/"><i class="mdl-color-text--blue-grey-400 material-icons">book</i>Documentation</a>
             <!--
             <a class="mdl-navigation__link" href="<?php echo $user['login'] ?>/activity/"><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Social</a>
@@ -385,7 +385,6 @@ limitations under the License
               </defs>
             </svg>
 
-            <?php print_r($_SESSION); ?>
 
             <script src="material.min.js"></script>
           </body>
