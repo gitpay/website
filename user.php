@@ -70,7 +70,7 @@ try {
 
 } catch(Exception $e) {
   $throttled = true;
-  error_log( $sql . "<br>" . $e->getMessage());
+  error_log( "<br>" . $e->getMessage());
 }
 
 if (!$users) {
