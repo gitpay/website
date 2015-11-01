@@ -55,7 +55,8 @@ try {
   bitcoin VARCHAR(255) NULL,
   bitmark VARCHAR(255) NULL,
   preferredURI VARCHAR(255) NULL,
-  created_at TIMESTAMP NOT NULL
+  created_at TIMESTAMP NOT NULL,
+  UNIQUE KEY `login` (`login`)
   ) ENGINE=InnoDB
 EOSQL;
 
