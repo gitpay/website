@@ -275,7 +275,7 @@ limitations under the License
               <use xlink:href="#piechart" mask="url(#piemask)" />
               <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1"><?php echo $rank ?><tspan font-size="0.2" dy="-0.07">%</tspan></text>
             </svg>
-            <h3>Gitpay <a target="_blank" href="https://www.gitbook.com/book/melvincarvalho/gitpay/edit#/edit/master/chapter5.md">Ranking</a></h3>
+            <h3>Gitpay <a target="_blank" href="https://melvincarvalho.gitbooks.io/gitpay/content/chapter5.html">Ranking</a></h3>
             </div>
             <?php
           } else {
