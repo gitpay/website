@@ -333,7 +333,14 @@ function getTurtle($user, $webid, $users, $keys) {
 }
 
 function writeTurtle($turtle) {
-  header('Access-Control-Allow-Origin : *');
+  if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    header('Access-Control-Allow-Credentials: true');
+  } else {
+    header('Access-Control-Allow-Origin : *');
+  }
+
+
   header("Vary: Accept");
   if (stristr($_SERVER["HTTP_ACCEPT"], "application/turtle")) {
     header("Content-Type: application/turtle");
