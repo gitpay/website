@@ -100,6 +100,18 @@ function getUser($nick, $conn = null, $client = null) {
   return $user;
 }
 
+function deleteUser($nick, $conn = null, $client = null) {
+  if ($conn) {
+    $sql = "delete from users where login = '$nick'; ";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+    $sql = "delete from preferences where webid = '$nick'; ";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+  }
+}
+
 function getActive($nick, $conn) {
   $sql = "select * from preferences where webid = '$nick'; ";
   $active = select($sql, $conn);
