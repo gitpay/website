@@ -100,6 +100,18 @@ function getUser($nick, $conn = null, $client = null) {
   return $user;
 }
 
+function deleteUser($nick, $conn = null, $client = null) {
+  if ($conn) {
+    $stmt = $conn->prepare('delete from users where login = :nick');
+    $stmt = $conn->bindParam(':nick', $nick, PDO::PARAM_STR, 255);
+    $stmt->execute();
+
+    $stmt = $conn->prepare('delete from preferences where webid = :nick');
+    $stmt = $conn->bindParam(':nick', $nick, PDO::PARAM_STR, 255);
+    $stmt->execute();
+  }
+}
+
 function getActive($nick, $conn) {
   $sql = "select * from preferences where webid = '$nick'; ";
   $active = select($sql, $conn);

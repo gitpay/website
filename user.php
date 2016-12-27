@@ -239,7 +239,8 @@ limitations under the License
           <h3>Gitpay Ranking <?php  if (isset($ledger) && $ledger['balance']) echo "<br><a class='mdl-color-text--blue-800' target='_blank' href='w/?walletURI=https:%2F%2Fgitpay.databox.me%2FPublic%2F.wallet%2Fgithub.com%2Flinkeddata%2FSoLiD%2Fwallet%23this&user=". urlencode($preferredURI) ."'>$ledger[balance] bits</a> - <a href='$project'>Project</a>" ; ?></h3>
         -->
 
-        <?php if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick  ) {
+        <?php
+        if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick  ) {
           echo "<h3>Welcome, " . $nick .  "<h3>";
         } else {
           if (!empty($active) && $active['active'] == 1 ) {
@@ -255,8 +256,9 @@ limitations under the License
         <h3>Info</h3>
         <hr>
 
-        <?php if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick  ) {
-          echo "<h4>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more <a target=\"_blank\" href=\"https://melvincarvalho.gitbooks.io/gitpay/content/\">features</a> coming soon.<h4><hr>";
+        <?php
+        if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true' && $_SESSION['login'] === $nick  ) {
+          echo "<h4>Congratulations, you have logged in.  You have earnt one reputation point.  Account management and more <a target=\"_blank\" href=\"https://melvincarvalho.gitbooks.io/gitpay/content/\">features</a> coming soon.<h4><h4>If you wish to opt-out of gitpay, click here: <a href='/deleteuser.php'>Remove my account</a></h4><hr>";
 
           ?>
           <h3>Donations</h3>
