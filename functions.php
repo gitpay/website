@@ -106,8 +106,8 @@ function deleteUser($nick, $conn = null, $client = null) {
     $stmt = $conn->prepare($sql);
     $stmt->execute();
 
-    $sql = "delete from preferences where webid = '$nick'; ";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare('delete from preferences where webid = :nick');
+    $stmt = $conn->bindParam(':nick', $nick, PDO::PARAM_STR, 255);
     $stmt->execute();
   }
 }
