@@ -102,8 +102,8 @@ function getUser($nick, $conn = null, $client = null) {
 
 function deleteUser($nick, $conn = null, $client = null) {
   if ($conn) {
-    $sql = "delete from users where login = '$nick'; ";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare('delete from users where login = :nick');
+    $stmt = $conn->bindParam(':nick', $nick, PDO::PARAM_STR, 255);
     $stmt->execute();
 
     $stmt = $conn->prepare('delete from preferences where webid = :nick');
