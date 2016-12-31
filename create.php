@@ -10,17 +10,23 @@ try {
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   $sql = <<<EOSQL
-  CREATE TABLE users (
-  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  login VARCHAR(255) NOT NULL,
-  name VARCHAR(255) NULL,
-  company VARCHAR(255) NULL,
-  location VARCHAR(255) NULL,
-  email VARCHAR(255) NULL,
-  avatar_url VARCHAR(255) NULL,
-  blog VARCHAR(255) NULL,
-  created_at TIMESTAMP NOT NULL
-  ) ENGINE=InnoDB
+  CREATE TABLE IF NOT EXISTS `users` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+    `login` VARCHAR(255) NOT NULL COMMENT '',
+    `company` VARCHAR(255) NULL DEFAULT NULL COMMENT '',
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+    `type` VARCHAR(255) NOT NULL DEFAULT 'USR' COMMENT '',
+    `fake` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '',
+    `deleted` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '',
+    `long` DECIMAL(11,8) COMMENT '',
+    `lat` DECIMAL(10,8) COMMENT '',
+    `country_code` CHAR(3) COMMENT '',
+    `state` VARCHAR(255) COMMENT '',
+    `city` VARCHAR(255) COMMENT '',
+    `location` VARCHAR(255) NULL DEFAULT NULL COMMENT '',
+    PRIMARY KEY (`id`)  COMMENT '')
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 EOSQL;
 
   $r = $dbh->exec($sql);

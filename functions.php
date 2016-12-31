@@ -1,11 +1,15 @@
 <?php
 
 // Helper functions
-function select($sql, $conn) {
+function select($sql, $conn, $params = null) {
   try {
 
     $stmt = $conn->prepare($sql);
-    $stmt->execute();
+    if ($params) {
+      $stmt->execute($params);
+    } else {
+      $stmt->execute();
+    }
     $res = $stmt->fetch();
     return $res;
 
@@ -17,11 +21,15 @@ function select($sql, $conn) {
 
 }
 
-function selectAll($sql, $conn) {
+function selectAll($sql, $conn, $params = null) {
   try {
 
     $stmt = $conn->prepare($sql);
-    $stmt->execute();
+    if ($params) {
+      $stmt->execute($params);
+    } else {
+      $stmt->execute();
+    }
     $res = $stmt->fetchAll();
     return $res;
 
@@ -67,11 +75,12 @@ function insertUser($user, $nick, $conn) {
     } else {
       $name = "'$user[name]'";
     }
-    $sql = "insert into users values ($user[id], '$nick', $name, $email, $company, $location, $avatar, $blog, NULL, DEFAULT, DEFAULT, DEFAULT, DEFAULT) ; ";
+    $sql = "insert into users values (:user, :nick, :company, NULL, DEFAULT, DEFAULT, DEFAULT, NULL, NULL, NULL, NULL, NULL, :location) ; ";
     error_log($sql);
 
+    $params = array(':user' => $user['id'], ':nick' => $nick, ':company' => $company, ':location' => $location);
     $stmt = $conn->prepare($sql);
-    $stmt->execute();
+    $stmt->execute($params);
 
   }
   catch(Exception $e)
@@ -91,8 +100,11 @@ function send503($nick) {
 
 function getUser($nick, $conn = null, $client = null) {
   if ($conn) {
-    $sql = "select * from users where login = '$nick' and deleted != 1; ";
-    $user = select($sql, $conn);
+
+    $sql = "select * from users where login = :nick and deleted != 1; ";
+    $params = array(':nick' => $nick);
+    $uesr = select($sql, $conn, $params);
+
   } else if ($client) {
     //throw new Exception('503 simulated');
     $user = $client->api('user')->show($nick);
@@ -113,8 +125,9 @@ function deleteUser($nick, $conn = null, $client = null) {
 }
 
 function getActive($nick, $conn) {
-  $sql = "select * from preferences where webid = '$nick'; ";
-  $active = select($sql, $conn);
+  $sql = "select * from preferences where webid = :nick; ";
+  $params = array(':nick' => $nick);
+  $active = select($sql, $conn, $params);
 
   return $active;
 }
@@ -123,11 +136,12 @@ function getActive($nick, $conn) {
 function insertFollowers($users, $id, $conn) {
   for ($i=0; $i<sizeof($users); $i++) {
     $fid = $users[$i]['id'];
-    $sql = "insert into followers values ($fid, $id, NULL, DEFAULT) ; ";
+    $sql = "insert into followers values (:fid, :id, NULL, DEFAULT) ; ";
     //error_log($sql);
+    $params = array(':fid' => $fid, ':id', $id);
     $stmt = $conn->prepare($sql);
     try {
-      $stmt->execute();
+      $stmt->execute($params);
     } catch(Exception $e) {
       //error_log( $sql . " : " . $e->getMessage());
     }
@@ -136,11 +150,12 @@ function insertFollowers($users, $id, $conn) {
 
 function activateUser($user, $conn) {
 
-  $sql = "replace into preferences values (NULL, '$user', 1, NULL) ; ";
+  $sql = "replace into preferences values (NULL, :user, 1, NULL) ; ";
   //error_log($sql);
+  $params = array(':user', $user);
   $stmt = $conn->prepare($sql);
   try {
-    $stmt->execute();
+    $stmt->execute($params);
   } catch(Exception $e) {
     //error_log( $sql . " : " . $e->getMessage());
   }
@@ -150,16 +165,18 @@ function addBitcoin($bitcoin, $conn) {
   if (empty($_SESSION['login'])) {
     return;
   }
-  $sql = " insert into webid values (NULL, '" . $_SESSION['login'] . "', NULL, NULL, NULL, NULL) ; ";
+  $sql = " insert into webid values (NULL, :login, NULL, NULL, NULL, NULL) ; ";
   error_log($sql);
+  $params = array(':login', $_SESSION['login']);
   $stmt = $conn->prepare($sql);
   try {
     $stmt->execute();
   } catch(Exception $e) {
     //error_log( $sql . " : " . $e->getMessage());
   }
-  $sql = "update webid set bitcoin = '" . toBitcoinURI($bitcoin) . "' where login = '$_SESSION[login]' ; ";
+  $sql = "update webid set bitcoin = :bitcoin where login = '$_SESSION[login]' ; ";
   error_log($sql);
+  $params = array(':bitcoin' => toBitcoinURI($bitcoin));
   $stmt = $conn->prepare($sql);
   try {
     $stmt->execute();
@@ -202,10 +219,11 @@ function getLedger($webid, $conn) {
 
     try {
       // sql to create table
-      $sql = "select l.*, w.codeRepository from ledger l inner join wallet w on w.uri = l.wallet where l.uri = '$preferredURI' ; ";
+      $sql = "select l.*, w.codeRepository from ledger l inner join wallet w on w.uri = l.wallet where l.uri = :preferredURI ; ";
 
+      $params = array(':preferredURI', $preferredURI);
       $stmt = $conn->prepare($sql);
-      $stmt->execute();
+      $stmt->execute($params);
       $ledger = $stmt->fetch();
       return $ledger;
 
@@ -231,8 +249,9 @@ function getRank($users) {
 
 function getFollowers($nick, $conn = null, $client = null) {
   if ($conn) {
-    $sql = "select u.id as id, u.login as login from followers f inner join users u on f.user_id = u.id where follower_id = '$nick' ; ";
-    $followers = selectAll($sql, $conn);
+    $sql = "select u.id as id, u.login as login from followers f inner join users u on f.user_id = u.id where follower_id = :nick ; ";
+    $params = array(':nick' => $nick);
+    $followers = selectAll($sql, $conn, $params);
   } else if ($client) {
     $followers = $client->api('user')->followers($nick);
   }
@@ -242,8 +261,9 @@ function getFollowers($nick, $conn = null, $client = null) {
 
 function getKeys($nick, $conn = null, $client = null) {
   if ($conn) {
-    $sql = "select key_id as id, `key` from publickeys where login = '$nick' ;";
-    $keys = selectAll($sql, $conn);
+    $sql = "select key_id as id, `key` from publickeys where login = :nick ;";
+    $params = array(':nick' => $nick);
+    $keys = selectAll($sql, $conn, $params);
   } else if ($client) {
     $keys = $client->api('user')->keys($nick);
   }
@@ -252,8 +272,9 @@ function getKeys($nick, $conn = null, $client = null) {
 }
 
 function getWebID($nick, $conn) {
-  $sql = "select * from webid where login = '$nick' ; ";
-  $webid = select($sql, $conn);
+  $sql = "select * from webid where login = :nick ; ";
+  $params = array(':nick' => $nick);
+  $webid = select($sql, $conn, $params);
   return $webid;
 }
 
@@ -270,9 +291,10 @@ function insertKeys($keys, $nick, $conn) {
       } else {
         $name = "'$user[name]'";
       }
-      $sql = "insert into publickeys values ($id, '$nick', '$key', NULL) ; ";
+      $sql = "insert into publickeys values (:id, :nick, :key, NULL) ; ";
       //error_log($sql);
 
+      $params = array(':id' => $id, ':nick' => $nick, ':key' => $key);
       $stmt = $conn->prepare($sql);
       $stmt->execute();
 
