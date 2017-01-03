@@ -11,7 +11,7 @@ include_once('functions.php');
 $fallbackdb = 'ghtorrent';
 $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$connfb = new PDO("mysql:host=$host;dbname=$fallbackdb", $username, $password);
+$connfb = new PDO("mysql:host=$host;dbname=gitpay", $username, $password);
 $connfb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'true') {
